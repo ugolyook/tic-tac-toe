@@ -5,7 +5,8 @@ class Main {
 
         Scanner scanner = new Scanner(System.in);
         String choice;
-        Boarder gameBoard = null;
+
+        Boarder gameBoard = new Boarder();
 
         do{
             System.out.println("\n Hello players");
@@ -32,10 +33,6 @@ class Main {
 
                     System.out.print("Enter 2 gamers simbol(x/o): ");
                     gamer.setSimbol_2(scanner.nextLine());
-
-                    if (gameBoard == null){
-                        gameBoard = new Boarder();
-                    }
 
                     System.out.println("Initial data");
                     gamer.showInfo();
