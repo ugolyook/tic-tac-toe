@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class Main {
-    public static void main(String[]args){
+    static void main(String[] args){
 
         Scanner scanner = new Scanner(System.in);
         String choice;
@@ -20,22 +20,7 @@ class Main {
 
             switch(option){
                 case 1 -> {
-                    Gamer gamer = new Gamer();
-
-                    System.out.print("Enter 1 gamers name: ");
-                    gamer.setName_1(scanner.nextLine());
-
-                    System.out.print("Enter 1 gamers simbol(x/o): ");
-                    gamer.setSimbol_1(scanner.nextLine());
-
-                    System.out.print("Enter 2 gamers name: ");
-                    gamer.setName_2(scanner.nextLine());
-
-                    System.out.print("Enter 2 gamers simbol(x/o): ");
-                    gamer.setSimbol_2(scanner.nextLine());
-
-                    System.out.println("Initial data");
-                    gamer.showInfo();
+                    initializePlayers(scanner);
                 }
                 case 2 -> {
                     if (gameBoard != null) {
@@ -54,5 +39,24 @@ class Main {
         } while (choice.equalsIgnoreCase("y"));
         System.out.println("Program finished.");
         scanner.close();
+    }
+
+    private static void initializePlayers(Scanner scanner) {
+        Player gamer = new Player();
+
+        System.out.print("Enter 1 gamers name: ");
+        gamer.setName1(scanner.nextLine());
+
+        System.out.print("Enter 1 gamers simbol(x/o): ");
+        gamer.setSimbol1(scanner.nextLine());
+
+        System.out.print("Enter 2 gamers name: ");
+        gamer.setName2(scanner.nextLine());
+
+        System.out.print("Enter 2 gamers simbol(x/o): ");
+        gamer.setSimbol2(scanner.nextLine());
+
+        System.out.println("Initial data");
+        gamer.showInfo();
     }
 }

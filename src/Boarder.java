@@ -1,5 +1,4 @@
-public class Boarder
-{
+public class Boarder {
     private char[][] matrix;
 
     public Boarder() {
