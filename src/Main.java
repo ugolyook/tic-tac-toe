@@ -1,26 +1,35 @@
 import java.util.Scanner;
 
 class Main {
-    static void main(String[] args){
+    static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         String choice;
+        int y = 0;
 
-        Boarder gameBoard = new Boarder();
+        Boarder gameBoard = null;
+        Player players = null;
 
-        do{
-            System.out.println("\n Hello players");
-            System.out.println("Welcome to the tic-tac-toe!");
-            System.out.println("1-Add player");
-            System.out.println("2-Show table");
-            System.out.println("3-End");
+        System.out.println("\n Hello players");
+        System.out.println("Welcome to the tic-tac-toe!");
+        System.out.println("1-Add player");
+        System.out.println("2-Show table");
+        System.out.println("3-Start game");
+        System.out.println("4-End");
+
+        do {
             System.out.print("Your choice: ");
             int option = scanner.nextInt();
             scanner.nextLine();
-
-            switch(option){
+            switch (option) {
                 case 1 -> {
-                    initializePlayers(scanner);
+                    Player gamer = initializePlayers(scanner);
+                    gameBoard = new Boarder(
+                            gamer.getName1(),
+                            gamer.getName2(),
+                            gamer.getSimbol1().charAt(0),
+                            gamer.getSimbol2().charAt(0)
+                    );
                 }
                 case 2 -> {
                     if (gameBoard != null) {
@@ -30,18 +39,29 @@ class Main {
                         System.out.println("Board not initialized!");
                     }
                 }
+                case 3 -> {
+                    if (gameBoard != null) {
+                        System.out.println("\nCurrent game board:");
+                        gameBoard.showInfo();
+                        gameBoard.play();
+                    } else {
+                        System.out.println("Board not initialized!");
+                    }
+                }
+                case 4 -> {
+                    System.out.println("Program finished.");
+                    scanner.close();
+                    return;
+                }
             }
-
-            System.out.print("\nDo you want to continue? (y/n): ");
-            choice = scanner.next();
-            scanner.nextLine();
-
-        } while (choice.equalsIgnoreCase("y"));
+        }
+        while (y != 2);
         System.out.println("Program finished.");
         scanner.close();
+
     }
 
-    private static void initializePlayers(Scanner scanner) {
+    private static Player initializePlayers(Scanner scanner) {
         Player gamer = new Player();
 
         System.out.print("Enter 1 gamers name: ");
@@ -58,5 +78,6 @@ class Main {
 
         System.out.println("Initial data");
         gamer.showInfo();
+        return gamer;
     }
 }
