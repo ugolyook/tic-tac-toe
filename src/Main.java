@@ -4,8 +4,6 @@ class Main {
     static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        String choice;
-        int y = 0;
 
         Boarder gameBoard = null;
         Player players = null;
@@ -23,16 +21,12 @@ class Main {
             scanner.nextLine();
             switch (option) {
                 case 1 -> {
-                    Player gamer = initializePlayers(scanner);
-                    gameBoard = new Boarder(
-                            gamer.getName1(),
-                            gamer.getName2(),
-                            gamer.getSimbol1().charAt(0),
-                            gamer.getSimbol2().charAt(0)
-                    );
+                    Player gamer1 = initializePlayers(scanner);//2 player
+                    Player gamer2 = initializePlayers(scanner);//2 player
+                    gameBoard = new Boarder(gamer1,gamer2);
                 }
                 case 2 -> {
-                    if (gameBoard != null) {
+                    if (gameBoard != null) { //method
                         System.out.println("\nCurrent game board:");
                         gameBoard.showInfo();
                     } else {
@@ -55,26 +49,23 @@ class Main {
                 }
             }
         }
-        while (y != 2);
-        System.out.println("Program finished.");
-        scanner.close();
-
+        while (true);
     }
 
-    private static Player initializePlayers(Scanner scanner) {
+    private static Player initializePlayers(Scanner scanner) {//cheack for char
         Player gamer = new Player();
 
         System.out.print("Enter 1 gamers name: ");
-        gamer.setName1(scanner.nextLine());
+        gamer.setName(scanner.nextLine());
 
         System.out.print("Enter 1 gamers simbol(x/o): ");
-        gamer.setSimbol1(scanner.nextLine());
+        gamer.setSimbol(scanner.nextLine().charAt(0));
 
         System.out.print("Enter 2 gamers name: ");
         gamer.setName2(scanner.nextLine());
 
         System.out.print("Enter 2 gamers simbol(x/o): ");
-        gamer.setSimbol2(scanner.nextLine());
+        gamer.setSimbol2(scanner.nextLine().charAt(0));//simbol(string size == 1)
 
         System.out.println("Initial data");
         gamer.showInfo();

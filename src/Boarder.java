@@ -1,20 +1,19 @@
 import java.util.Scanner;
 
-public class Boarder extends Player {
+public class Boarder {
     private char[][] matrix;
-    private int Move;
+    private int move;
     private Scanner scanner;
+    private Player player1;
+    private Player player2;
 
-    public Boarder(String name1, String name2, char simbol1,char simbol2) {
-        super();
-        setName1(name1);
-        setName2(name2);
-        setSimbol1(String.valueOf(simbol1));
-        setSimbol2(String.valueOf(simbol2));
+    public Boarder(Player player1, Player player2) {
         this.scanner = new Scanner(System.in);
-        this.Move = 0;
+        this.move = 0;
         matrix = new char[3][3];
         initializeBoard();
+        this.player2 = player2;
+        this.player1 = player1;
     }
 
     private void initializeBoard() {
@@ -34,27 +33,24 @@ public class Boarder extends Player {
         }
     }
 
+    //fix
     public void play() {
         System.out.println("Let start game:");
-        Move=0;
+        move = 0;
         initializeBoard();
         showInfo();
 
         for (int moveCount = 0; moveCount < 5; moveCount++) {
-            System.out.println("Move:" + (Move + 1) + "\nPlayer:" + getName1() + " give your choise:");
-            if (getName1() != null) {
-                playerMove(getName1(), getSimbol1().charAt(0));
-            }
-            Move++;
+            System.out.println("Move:" + (move + 1) + "\nPlayer:" + player2.getName() + " give your choise:");
+            playerMove(player2.getName(), player2.getSimbol());
+            move++;
 
             if (winnerCheck()) return;
 
-            if(Move<9) {
-                System.out.println("Move:" + (Move + 1) + "\nPlayer:" + getName2() + " give your choise:");
-                if (getName2() != null) {
-                    playerMove(getName2(), getSimbol2().charAt(0));
-                }
-                Move++;
+            if (move < 9) {
+                System.out.println("Move:" + (move + 1) + "\nPlayer:" + player2.getName2() + " give your choise:");
+                playerMove(player2.getName2(), player2.getSimbol2());
+                move++;
                 if (winnerCheck()) return;
             }
         }
@@ -63,10 +59,8 @@ public class Boarder extends Player {
     public void playerMove(String playerName, char playerSimbol) {
 
         System.out.println("\nPlayer:" + playerName + " Make your move: ");
-        int r=0;
         int i = -1, j = -1;
-        while(r==0)
-        {
+        while (true) {
             System.out.print("\nEnter your i (0-2): ");
             if (scanner.hasNextInt()) {
                 i = scanner.nextInt();
@@ -80,19 +74,20 @@ public class Boarder extends Player {
             if (i >= 0 && i < 3 && j >= 0 && j < 3) {
                 if (matrix[i][j] == '*') {
                     matrix[i][j] = playerSimbol;
-                    r = 1;
 
                     System.out.println("\nCurrent board:");
                     showInfo();
-                }else {
+                    break;
+                } else {
                     System.out.println("\nCell is already occupied! Choose another one.");
                 }
-            }else {
+            } else {
                 System.out.println("\nCoordinates must be between 0 and 2!");
             }
         }
     }
 
+    //fix
     public boolean winnerCheck() {
         if (matrix[0][0] == 'x' && matrix[0][1] == 'x' && matrix[0][2] == 'x') {
             System.out.println("\nX is winner!!!");
