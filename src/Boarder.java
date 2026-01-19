@@ -12,8 +12,8 @@ public class Boarder {
         this.move = 0;
         matrix = new char[3][3];
         initializeBoard();
-        this.player2 = player2;
         this.player1 = player1;
+        this.player2 = player2;
     }
 
     private void initializeBoard() {
@@ -39,17 +39,18 @@ public class Boarder {
         move = 0;
         initializeBoard();
         showInfo();
+        int moveNumber = (matrix.length * matrix.length);
 
-        for (int moveCount = 0; moveCount < 5; moveCount++) {
-            System.out.println("Move:" + (move + 1) + "\nPlayer:" + player2.getName() + " give your choise:");
-            playerMove(player2.getName(), player2.getSimbol());
+        for (int moveCount = 0; moveCount < moveNumber; moveCount++) {
+            System.out.println("Move:" + (move + 1) + "\nPlayer:" + player1.getName() + " give your choise:");
+            playerMove(player1.getName(), player1.getSimbol());
             move++;
 
             if (winnerCheck()) return;
 
-            if (move < 9) {
-                System.out.println("Move:" + (move + 1) + "\nPlayer:" + player2.getName2() + " give your choise:");
-                playerMove(player2.getName2(), player2.getSimbol2());
+            if (move < moveNumber) {
+                System.out.println("Move:" + (move + 1) + "\nPlayer:" + player2.getName() + " give your choise:");
+                playerMove(player2.getName(), player2.getSimbol());
                 move++;
                 if (winnerCheck()) return;
             }
@@ -71,7 +72,7 @@ public class Boarder {
                 j = scanner.nextInt();
                 scanner.nextLine();
             }
-            if (i >= 0 && i < 3 && j >= 0 && j < 3) {
+            if (i >= 0 && i < matrix.length && j >= 0 && j < matrix.length) {
                 if (matrix[i][j] == '*') {
                     matrix[i][j] = playerSimbol;
 

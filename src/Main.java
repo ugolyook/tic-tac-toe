@@ -21,26 +21,16 @@ class Main {
             scanner.nextLine();
             switch (option) {
                 case 1 -> {
-                    Player gamer1 = initializePlayers(scanner);//2 player
+                    Player gamer1 = initializePlayers(scanner);//1 player
                     Player gamer2 = initializePlayers(scanner);//2 player
-                    gameBoard = new Boarder(gamer1,gamer2);
+                    gameBoard = new Boarder(gamer1, gamer2);
                 }
                 case 2 -> {
-                    if (gameBoard != null) { //method
-                        System.out.println("\nCurrent game board:");
-                        gameBoard.showInfo();
-                    } else {
-                        System.out.println("Board not initialized!");
-                    }
+                    boardCheacker(gameBoard);
                 }
                 case 3 -> {
-                    if (gameBoard != null) {
-                        System.out.println("\nCurrent game board:");
-                        gameBoard.showInfo();
-                        gameBoard.play();
-                    } else {
-                        System.out.println("Board not initialized!");
-                    }
+                    boardCheacker(gameBoard);
+                    gameBoard.play();
                 }
                 case 4 -> {
                     System.out.println("Program finished.");
@@ -52,23 +42,47 @@ class Main {
         while (true);
     }
 
+    //method
+    private static void boardCheacker(Boarder gameBoard) {
+        if (gameBoard != null) {
+            System.out.println("\nCurrent game board:");
+            gameBoard.showInfo();
+        } else {
+            System.out.println("Board not initialized!");
+        }
+    }
+
     private static Player initializePlayers(Scanner scanner) {//cheack for char
         Player gamer = new Player();
 
-        System.out.print("Enter 1 gamers name: ");
-        gamer.setName(scanner.nextLine());
+        System.out.print("Enter gamer name: ");
+        gamer.setName(scanner.nextLine().toLowerCase());
 
-        System.out.print("Enter 1 gamers simbol(x/o): ");
-        gamer.setSimbol(scanner.nextLine().charAt(0));
+        System.out.print("Enter gamer simbol(x/o): ");
+        String input = scanner.nextLine().trim();
 
-        System.out.print("Enter 2 gamers name: ");
-        gamer.setName2(scanner.nextLine());
+       gamer.simbol = lengthCheacker(input,scanner);
 
-        System.out.print("Enter 2 gamers simbol(x/o): ");
-        gamer.setSimbol2(scanner.nextLine().charAt(0));//simbol(string size == 1)
+        if (gamer.simbol != 'x' && gamer.simbol !='o') {
+            System.out.println("\nTry again (x/o):");
+            input = scanner.nextLine().trim();
+            gamer.simbol = lengthCheacker(input,scanner);
+        }
 
         System.out.println("Initial data");
         gamer.showInfo();
         return gamer;
+    }
+
+    private static char lengthCheacker(String input, Scanner scanner) {
+        if (input.length() != 1) {
+            System.out.println("\nTry again...");
+            System.out.print("\nEnter gamer simbol(x/o): ");
+            input = scanner.nextLine().trim();
+
+            return lengthCheacker(input, scanner);
+        } else {
+       return input.charAt(0);
+        }
     }
 }

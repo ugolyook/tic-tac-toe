@@ -12,6 +12,6 @@ public class Player {
     public void setSimbol(char simbol) {this.simbol = simbol;}
 
     public void showInfo() {
-        System.out.println("1 Gamer name:" + getName() + "\n1 Gamer simbol:" + getSimbol());
+        System.out.println("Gamer name:" + getName() + "\nGamer simbol:" + getSimbol());
     }
 }
