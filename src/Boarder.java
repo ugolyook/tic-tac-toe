@@ -1,15 +1,13 @@
 import java.util.Scanner;
 
 public class Boarder {
-    private char[][] matrix;
-    private int move;
-    private Scanner scanner;
-    private Player player1;
-    private Player player2;
+    private final char[][] matrix;
+    private final Scanner scanner;
+    private final Player player1;
+    private final Player player2;
 
     public Boarder(Player player1, Player player2) {
         this.scanner = new Scanner(System.in);
-        this.move = 0;
         matrix = new char[3][3];
         initializeBoard();
         this.player1 = player1;
@@ -36,24 +34,23 @@ public class Boarder {
     //fix
     public void play() {
         System.out.println("Let start game:");
-        move = 0;
         initializeBoard();
         showInfo();
-        int moveNumber = (matrix.length * matrix.length);
+        int maxMoveNumbers = (matrix.length * matrix.length);
 
-        for (int moveCount = 0; moveCount < moveNumber; moveCount++) {
-            System.out.println("Move:" + (move + 1) + "\nPlayer:" + player1.getName() + " give your choise:");
+        for (int moveNumber = 0; moveNumber < maxMoveNumbers; moveNumber += 2) {
+            System.out.println("Move:" + (moveNumber + 1) + "\nPlayer:" + player1.getName() + " give your chose:");
             playerMove(player1.getName(), player1.getSimbol());
-            move++;
 
             if (winnerCheck()) return;
 
-            if (move < moveNumber) {
-                System.out.println("Move:" + (move + 1) + "\nPlayer:" + player2.getName() + " give your choise:");
-                playerMove(player2.getName(), player2.getSimbol());
-                move++;
-                if (winnerCheck()) return;
+            if (moveNumber + 1 == maxMoveNumbers){
+                return;
             }
+
+                System.out.println("Move:" + (moveNumber + 2) + "\nPlayer:" + player2.getName() + " give your chose:");
+            playerMove(player2.getName(), player2.getSimbol());
+            if (winnerCheck()) return;
         }
     }
 
@@ -88,7 +85,7 @@ public class Boarder {
         }
     }
 
-    //fix
+    //fix, ничья
     public boolean winnerCheck() {
         if (matrix[0][0] == 'x' && matrix[0][1] == 'x' && matrix[0][2] == 'x') {
             System.out.println("\nX is winner!!!");

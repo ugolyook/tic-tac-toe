@@ -26,10 +26,10 @@ class Main {
                     gameBoard = new Boarder(gamer1, gamer2);
                 }
                 case 2 -> {
-                    boardCheacker(gameBoard);
+                    boardChecker(gameBoard);
                 }
                 case 3 -> {
-                    boardCheacker(gameBoard);
+                    boardChecker(gameBoard);
                     gameBoard.play();
                 }
                 case 4 -> {
@@ -43,7 +43,7 @@ class Main {
     }
 
     //method
-    private static void boardCheacker(Boarder gameBoard) {
+    private static void boardChecker(Boarder gameBoard) {
         if (gameBoard != null) {
             System.out.println("\nCurrent game board:");
             gameBoard.showInfo();
@@ -52,7 +52,7 @@ class Main {
         }
     }
 
-    private static Player initializePlayers(Scanner scanner) {//cheack for char
+    private static Player initializePlayers(Scanner scanner) {//check for char
         Player gamer = new Player();
 
         System.out.print("Enter gamer name: ");
@@ -61,12 +61,12 @@ class Main {
         System.out.print("Enter gamer simbol(x/o): ");
         String input = scanner.nextLine().trim();
 
-       gamer.simbol = lengthCheacker(input,scanner);
+        gamer.simbol = lengthChecker(input, scanner);
 
-        if (gamer.simbol != 'x' && gamer.simbol !='o') {
+        if (gamer.simbol != 'x' && gamer.simbol != 'o') { //1 method
             System.out.println("\nTry again (x/o):");
             input = scanner.nextLine().trim();
-            gamer.simbol = lengthCheacker(input,scanner);
+            gamer.simbol = lengthChecker(input, scanner);
         }
 
         System.out.println("Initial data");
@@ -74,15 +74,15 @@ class Main {
         return gamer;
     }
 
-    private static char lengthCheacker(String input, Scanner scanner) {
+    private static char lengthChecker(String input, Scanner scanner) {//1 method
         if (input.length() != 1) {
             System.out.println("\nTry again...");
             System.out.print("\nEnter gamer simbol(x/o): ");
             input = scanner.nextLine().trim();
 
-            return lengthCheacker(input, scanner);
+            return lengthChecker(input, scanner);
         } else {
-       return input.charAt(0);
+            return input.charAt(0);
         }
     }
 }
