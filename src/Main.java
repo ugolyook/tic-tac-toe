@@ -7,13 +7,7 @@ class Main {
 
         Boarder gameBoard = null;
 
-        System.out.println("\n Hello players");
-        System.out.println("Welcome to the tic-tac-toe!");
-        System.out.println("1-Add player");
-        System.out.println("2-Show table");
-        System.out.println("3-Start game");
-        System.out.println("4-End");
-
+        greetings();
         do {
             System.out.print("Your choice: ");
             int option = scanner.nextInt();
@@ -30,6 +24,7 @@ class Main {
                 case 3 -> {
                     boardChecker(gameBoard);
                     gameBoard.play();
+                    greetings();
                 }
                 case 4 -> {
                     System.out.println("Program finished.");
@@ -39,6 +34,15 @@ class Main {
             }
         }
         while (true);
+    }
+
+    private static void greetings() {
+        System.out.println("\n Hello players");
+        System.out.println("Welcome to the tic-tac-toe!");
+        System.out.println("1-Add player");
+        System.out.println("2-Show table");
+        System.out.println("3-Start game");
+        System.out.println("4-End");
     }
 
     private static void boardChecker(Boarder gameBoard) {
@@ -66,7 +70,7 @@ class Main {
         return gamer;
     }
 
-    private static char simbolChecker(String input, Scanner scanner) {//1 method
+    private static char simbolChecker(String input, Scanner scanner) {
         if ((input.length() != 1) || (input.charAt(0) != 'x' && input.charAt(0) != 'o')) {
             System.out.println("\nTry again...");
             System.out.print("\nEnter gamer simbol (x/o): ");
