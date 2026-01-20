@@ -39,16 +39,17 @@ public class Boarder {
         int maxMoveNumbers = (matrix.length * matrix.length);
 
         for (int moveNumber = 0; moveNumber < maxMoveNumbers; moveNumber += 2) {
-            System.out.println("Move:" + (moveNumber + 1) + "\nPlayer:" + player1.getName() + " give your chose:");
+            System.out.println("Move:" + (moveNumber + 1) + "\nPlayer:" + player1.getName() + " give your choice:");
             playerMove(player1.getName(), player1.getSimbol());
 
             if (winnerCheck()) return;
 
-            if (moveNumber + 1 == maxMoveNumbers){
+            if (moveNumber + 1 == maxMoveNumbers) {
+                System.out.println("You have a draw!"); //fix
                 return;
             }
 
-                System.out.println("Move:" + (moveNumber + 2) + "\nPlayer:" + player2.getName() + " give your chose:");
+            System.out.println("Move:" + (moveNumber + 2) + "\nPlayer:" + player2.getName() + " give your chose:");
             playerMove(player2.getName(), player2.getSimbol());
             if (winnerCheck()) return;
         }
