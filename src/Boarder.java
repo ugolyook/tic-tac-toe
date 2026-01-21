@@ -5,6 +5,8 @@ public class Boarder {
     private final Scanner scanner;
     private final Player player1;
     private final Player player2;
+    private Player winner;
+    private boolean isDraw;
 
     public Boarder(Player player1, Player player2) {
         this.scanner = new Scanner(System.in);
@@ -12,6 +14,8 @@ public class Boarder {
         initializeBoard();
         this.player1 = player1;
         this.player2 = player2;
+        this.winner = null;
+        this.isDraw = false;
     }
 
     private void initializeBoard() {
@@ -41,17 +45,35 @@ public class Boarder {
             System.out.println("Move:" + (moveNumber + 1) + "\nPlayer:" + player1.getName() + " give your choice:");
             playerMove(player1.getName(), player1.getSimbol());
 
-            if (winnerCheck()) return;
+            if (winnerCheck()) {
+                dto();
+                return;
+            }
 
             if (moveNumber + 1 == maxMoveNumbers) {
                 System.out.println("You have a draw!");
-                return;
+                this.isDraw = true;
+                if (winnerCheck()) {
+                    dto();
+                } return;
             }
 
             System.out.println("Move:" + (moveNumber + 2) + "\nPlayer:" + player2.getName() + " give your chose:");
             playerMove(player2.getName(), player2.getSimbol());
-            if (winnerCheck()) return;
+            if (winnerCheck()) {
+                dto();
+            } return;
+
         }
+    }
+
+    private Dto dto (){
+        if(isDraw) {
+            return new Dto(player1,player2,matrix, winner);
+        } else{
+            return new Dto(player1,player2,matrix,winner);
+        }
+
     }
 
     public void playerMove(String playerName, char playerSimbol) {
@@ -90,38 +112,53 @@ public class Boarder {
         for (int i = 0; i < matrix.length; i++) {
             if (matrix[i][0] == 'x' & matrix[i][1] == 'x' & matrix[i][2] == 'x') {
                 System.out.println("\nX is winner");
+                showInfo();
+                this.winner = player1;
                 return true;
             }
-            if (matrix[i][0] == 'o' & matrix[i][1] == 'o' & matrix[i][2] == '0') {
+            if (matrix[i][0] == 'o' & matrix[i][1] == 'o' & matrix[i][2] == 'o') {
                 System.out.println("\nO is winner");
+                showInfo();
+                this.winner = player2;
                 return true;
             }
 
             if (matrix[0][i] == 'x' & matrix[1][i] == 'x' & matrix[2][i] == 'x') {
                 System.out.println("\nX is winner");
+                showInfo();this.winner = player1;
                 return true;
             }
             if (matrix[0][i] == 'o' & matrix[1][i] == 'o' & matrix[2][i] == 'o') {
                 System.out.println("\nO is winner");
+                showInfo();
+                this.winner = player2;
                 return true;
             }
 
         }
         if (matrix[0][0] == 'x' & matrix[1][1] == 'x' & matrix[2][2] == 'x') {
             System.out.println("\nX is winner");
+            showInfo();
+            this.winner = player1;
             return true;
         }
         if (matrix[0][2] == 'x' & matrix[1][1] == 'x' & matrix[2][0] == 'x') {
             System.out.println("\nX is winner");
+            showInfo();
+            this.winner = player1;
             return true;
         }
 
         if (matrix[0][0] == 'o' & matrix[1][1] == 'o' & matrix[2][2] == 'o') {
             System.out.println("\nO is winner");
+            showInfo();
+            this.winner = player2;
             return true;
         }
         if (matrix[0][2] == 'o' & matrix[1][1] == 'o' & matrix[2][0] == 'o') {
             System.out.println("\nO is winner");
+            showInfo();
+            this.winner = player2;
             return true;
         }
 
