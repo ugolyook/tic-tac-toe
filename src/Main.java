@@ -7,6 +7,7 @@ class Main {
         Scanner scanner = new Scanner(System.in);
 
         Boarder gameBoard = null;
+        FileManager file = null;
 
         greetings();
         do {
@@ -20,12 +21,13 @@ class Main {
                     gameBoard = new Boarder(gamer1, gamer2);
                 }
                 case 2 -> {
-                    boardChecker(gameBoard);
+                    printBoard(gameBoard);
                 }
                 case 3 -> {
-                    boardChecker(gameBoard);
+                    printBoard(gameBoard);
                     gameBoard.play();
-                    greetings();
+                    Dto dto = gameBoard.dto();
+                    file.dataSave(dto);
                 }
                 case 4 -> {
                     System.out.println("Program finished.");
@@ -38,7 +40,7 @@ class Main {
     }
 
     private static void greetings() {
-        System.out.println("\n Hello players");
+        System.out.println("Hello players");
         System.out.println("Welcome to the tic-tac-toe!");
         System.out.println("1-Add player");
         System.out.println("2-Show table");
@@ -46,7 +48,7 @@ class Main {
         System.out.println("4-End");
     }
 
-    private static void boardChecker(Boarder gameBoard) {
+    private static void printBoard(Boarder gameBoard) {
         if (gameBoard != null) {
             System.out.println("\nCurrent game board:");
             gameBoard.showInfo();
@@ -64,20 +66,20 @@ class Main {
         System.out.print("Enter gamer simbol(x/o): ");
         String input = scanner.nextLine().trim();
 
-        gamer.simbol = simbolChecker(input, scanner);
+        gamer.simbol = symbolValidator(input, scanner);
 
         System.out.println("Initial data");
         gamer.showInfo();
         return gamer;
     }
 
-    private static char simbolChecker(String input, Scanner scanner) {
+    private static char symbolValidator(String input, Scanner scanner) {
         if ((input.length() != 1) || (input.charAt(0) != 'x' && input.charAt(0) != 'o')) {
             System.out.println("\nTry again...");
             System.out.print("\nEnter gamer simbol (x/o): ");
             input = scanner.nextLine().trim();
 
-            return simbolChecker(input, scanner);
+            return symbolValidator(input, scanner);
         } else {
             return input.charAt(0);
         }

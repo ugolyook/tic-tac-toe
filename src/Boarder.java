@@ -50,24 +50,29 @@ public class Boarder {
                 return;
             }
 
-            if (moveNumber + 1 == maxMoveNumbers) {
-                System.out.println("You have a draw!");
-                this.isDraw = true;
-                if (winnerCheck()) {
-                    dto();
-                } return;
-            }
+            if (isDraw(moveNumber, maxMoveNumbers)) return;
 
             System.out.println("Move:" + (moveNumber + 2) + "\nPlayer:" + player2.getName() + " give your chose:");
             playerMove(player2.getName(), player2.getSimbol());
-            if (winnerCheck()) {
-                dto();
-            } return;
+
+            if (isDraw(moveNumber, maxMoveNumbers)) return;
 
         }
     }
 
-    private Dto dto (){
+    private boolean isDraw(int moveNumber, int maxMoveNumbers) {
+        if (moveNumber + 1 == maxMoveNumbers) {
+            System.out.println("You have a draw!");
+            this.isDraw = true;
+            if (winnerCheck()) {
+                dto();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public Dto dto(){
         if(isDraw) {
             return new Dto(player1,player2,matrix, winner);
         } else{
