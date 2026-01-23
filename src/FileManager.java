@@ -1,5 +1,6 @@
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileManager {
@@ -23,9 +24,9 @@ public class FileManager {
                 writer.write("\n");
             }
 
-            if(dto.winner.getName() != null){
+            if (dto.winner.getName() != null) {
                 writer.write("\nWinner: " + dto.winner.getName() + "\n");
-            }else{
+            } else {
                 writer.write("\nDraw!!!");
             }
 
@@ -36,8 +37,16 @@ public class FileManager {
         }
     }
 
-    public void dataReader(){
-
-    }//add it + make menu + cycle for 10 games
-
+    public void dataReader() {
+        System.out.println("\nStart reading data...");
+        try (BufferedReader reader = new BufferedReader(new FileReader("game_data.txt"))) {
+            String line;
+            while((line =reader.readLine())!=null)
+            {
+                System.out.println(line);
+            }
+        }catch(IOException e) {
+            System.out.println("Error with reading: " + e.getMessage());
+        }// + cycle for 10 games
+    }
 }

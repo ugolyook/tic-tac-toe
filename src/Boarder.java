@@ -72,11 +72,11 @@ public class Boarder {
         return false;
     }
 
-    public Dto dto(){
-        if(isDraw) {
-            return new Dto(player1,player2,matrix, winner);
-        } else{
-            return new Dto(player1,player2,matrix,winner);
+    public Dto dto() {
+        if (isDraw) {
+            return new Dto(player1, player2, matrix, winner);
+        } else {
+            return new Dto(player1, player2, matrix, winner);
         }
 
     }
@@ -115,53 +115,54 @@ public class Boarder {
     public boolean winnerCheck() {
 
         for (int i = 0; i < matrix.length; i++) {
-            if (matrix[i][0] == 'x' & matrix[i][1] == 'x' & matrix[i][2] == 'x') {
-                System.out.println("\nX is winner");
+            if (matrix[i][0] == player1.getSimbol() & matrix[i][1] == player1.getSimbol() & matrix[i][2] == player1.getSimbol()) {
+                System.out.println("\n" + player1.getSimbol() + " is winner");
                 showInfo();
                 this.winner = player1;
                 return true;
             }
-            if (matrix[i][0] == 'o' & matrix[i][1] == 'o' & matrix[i][2] == 'o') {
-                System.out.println("\nO is winner");
+            if (matrix[i][0] == player2.getSimbol() & matrix[i][1] == player2.getSimbol() & matrix[i][2] == player2.getSimbol()) {
+                System.out.println("\n" + player2.getSimbol() + " is winner");
                 showInfo();
                 this.winner = player2;
                 return true;
             }
 
-            if (matrix[0][i] == 'x' & matrix[1][i] == 'x' & matrix[2][i] == 'x') {
-                System.out.println("\nX is winner");
-                showInfo();this.winner = player1;
+            if (matrix[0][i] == player1.getSimbol() & matrix[1][i] == player1.getSimbol() & matrix[2][i] == player1.getSimbol()) {
+                System.out.println("\n" + player1.getSimbol() + " is winner");
+                showInfo();
+                this.winner = player1;
                 return true;
             }
-            if (matrix[0][i] == 'o' & matrix[1][i] == 'o' & matrix[2][i] == 'o') {
-                System.out.println("\nO is winner");
+            if (matrix[0][i] == player2.getSimbol() & matrix[1][i] == player2.getSimbol() & matrix[2][i] == player2.getSimbol()) {
+                System.out.println("\n" + player2.getSimbol() + " is winner");
                 showInfo();
                 this.winner = player2;
                 return true;
             }
 
         }
-        if (matrix[0][0] == 'x' & matrix[1][1] == 'x' & matrix[2][2] == 'x') {
-            System.out.println("\nX is winner");
+        if (matrix[0][0] == player1.getSimbol() & matrix[1][1] == player1.getSimbol() & matrix[2][2] == player1.getSimbol()) {
+            System.out.println("\n" + player1.getSimbol() + " is winner");
             showInfo();
             this.winner = player1;
             return true;
         }
-        if (matrix[0][2] == 'x' & matrix[1][1] == 'x' & matrix[2][0] == 'x') {
-            System.out.println("\nX is winner");
+        if (matrix[0][2] == player1.getSimbol() & matrix[1][1] == player1.getSimbol() & matrix[2][0] == player1.getSimbol()) {
+            System.out.println("\n" + player1.getSimbol() + " is winner");
             showInfo();
             this.winner = player1;
             return true;
         }
 
-        if (matrix[0][0] == 'o' & matrix[1][1] == 'o' & matrix[2][2] == 'o') {
-            System.out.println("\nO is winner");
+        if (matrix[0][0] == player2.getSimbol() & matrix[1][1] == player2.getSimbol() & matrix[2][2] == player2.getSimbol()) {
+            System.out.println("\n" + player2.getSimbol() + " is winner");
             showInfo();
             this.winner = player2;
             return true;
         }
-        if (matrix[0][2] == 'o' & matrix[1][1] == 'o' & matrix[2][0] == 'o') {
-            System.out.println("\nO is winner");
+        if (matrix[0][2] == player2.getSimbol() & matrix[1][1] == player2.getSimbol() & matrix[2][0] == player2.getSimbol()) {
+            System.out.println("\n" + player2.getSimbol() + " is winner");
             showInfo();
             this.winner = player2;
             return true;
