@@ -8,18 +8,18 @@ public class FileManager {
     public FileManager() {
     }
 
-    public void dataSave(Dto dto) {
+    public void saveData(GameResultDto dto) {
         System.out.println("\nStart saving game...");
         try (FileWriter writer = new FileWriter("game_data.txt", true)) {
             writer.write("\nGame data: ");
             writer.write("Gamer: " + dto.player1.getName() + "(" + dto.player1.getSimbol() + ")" + "\n");
             writer.write("Gamer: " + dto.player2.getName() + "(" + dto.player2.getSimbol() + ")" + "\n");
 
-            writer.write("\nFinal board: ");
+            writer.write("\nFinal board: \n");
             char[][] board = dto.finalBoard;
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board[i].length; j++) {
-                    writer.write(board[i][j] + "");
+                    writer.write(board[i][j] + " ");
                 }
                 writer.write("\n");
             }
@@ -37,15 +37,14 @@ public class FileManager {
         }
     }
 
-    public void dataReader() {
+    public void readData() {
         System.out.println("\nStart reading data...");
         try (BufferedReader reader = new BufferedReader(new FileReader("game_data.txt"))) {
             String line;
-            while((line =reader.readLine())!=null)
-            {
+            while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
-        }catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Error with reading: " + e.getMessage());
         }// + cycle for 10 games
     }

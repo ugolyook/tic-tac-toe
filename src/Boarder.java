@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.Scanner;//remove
 
 public class Boarder {
     private final char[][] matrix;
@@ -46,7 +46,6 @@ public class Boarder {
             playerMove(player1.getName(), player1.getSimbol());
 
             if (winnerCheck()) {
-                dto();
                 return;
             }
 
@@ -64,19 +63,16 @@ public class Boarder {
         if (moveNumber + 1 == maxMoveNumbers) {
             System.out.println("You have a draw!");
             this.isDraw = true;
-            if (winnerCheck()) {
-                dto();
-            }
             return true;
         }
         return false;
     }
 
-    public Dto dto() {
+    public GameResultDto dto() {
         if (isDraw) {
-            return new Dto(player1, player2, matrix, winner);
+            return new GameResultDto(player1, player2, matrix);
         } else {
-            return new Dto(player1, player2, matrix, winner);
+            return new GameResultDto(player1, player2, matrix, winner);
         }
 
     }

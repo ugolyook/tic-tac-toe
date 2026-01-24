@@ -7,7 +7,7 @@ class Main {
         Scanner scanner = new Scanner(System.in);
 
         Boarder gameBoard = null;
-        FileManager file = null;
+        FileManager file = new FileManager();
 
         greetings();
         do {
@@ -25,9 +25,9 @@ class Main {
                 }
                 case 3 -> {
                     gameBoard.play();
-                    Dto dto = gameBoard.dto();
+                    GameResultDto dto = gameBoard.dto();
                     fileMenu(file, dto, scanner);
-                    greetings();
+                    greetings();//main menu
                 }
                 case 4 -> {
                     System.out.println("Program finished.");
@@ -39,22 +39,22 @@ class Main {
         while (true);
     }
 
-    private static void fileMenu(FileManager file, Dto dto, Scanner scanner) {
+    private static void fileMenu(FileManager fileManager, GameResultDto result, Scanner scanner) {
         System.out.println("\nWhat u want to do next?");
         System.out.println("\n1-save data");
         System.out.println("\n2-read data");
-        System.out.println("\n2-continue");
+        System.out.println("\n3-continue");
         int choice;
         do {
-            System.out.print("Your choice: ");
+        System.out.print("Your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
                 case 1 -> {
-                    file.dataSave(dto);
+                    fileManager.saveData(result);
                 }
                 case 2 -> {
-                    file.dataReader();
+                    fileManager.readData();
                 }
                 case 3 -> {
                     System.out.println("\nContinue:");
