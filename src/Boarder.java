@@ -1,15 +1,11 @@
-import java.util.Scanner;//remove
-
 public class Boarder {
     private final char[][] matrix;
-    private final Scanner scanner;
     private final Player player1;
     private final Player player2;
     private Player winner;
     private boolean isDraw;
 
     public Boarder(Player player1, Player player2) {
-        this.scanner = new Scanner(System.in);
         matrix = new char[3][3];
         initializeBoard();
         this.player1 = player1;
@@ -36,22 +32,21 @@ public class Boarder {
     }
 
     public void play() {
-        System.out.println("Let start game:");
         initializeBoard();
         showInfo();
         int maxMoveNumbers = (matrix.length * matrix.length);
 
         for (int moveNumber = 0; moveNumber < maxMoveNumbers; moveNumber += 2) {
-            System.out.println("Move:" + (moveNumber + 1) + "\nPlayer:" + player1.getName() + " give your choice:");
+            Console.playConsole(player1.getName());
             playerMove(player1.getName(), player1.getSimbol());
 
-            if (winnerCheck()) {
+            if (isWinnerFound()) {
                 return;
             }
 
             if (isDraw(moveNumber, maxMoveNumbers)) return;
 
-            System.out.println("Move:" + (moveNumber + 2) + "\nPlayer:" + player2.getName() + " give your chose:");
+            Console.playConsole(player2.getName());
             playerMove(player2.getName(), player2.getSimbol());
 
             if (isDraw(moveNumber, maxMoveNumbers)) return;
@@ -61,7 +56,7 @@ public class Boarder {
 
     private boolean isDraw(int moveNumber, int maxMoveNumbers) {
         if (moveNumber + 1 == maxMoveNumbers) {
-            System.out.println("You have a draw!");
+            Console.isDrawConsole();
             this.isDraw = true;
             return true;
         }
@@ -108,30 +103,30 @@ public class Boarder {
         }
     }
 
-    public boolean winnerCheck() {
+    public boolean isWinnerFound() {
 
         for (int i = 0; i < matrix.length; i++) {
             if (matrix[i][0] == player1.getSimbol() & matrix[i][1] == player1.getSimbol() & matrix[i][2] == player1.getSimbol()) {
-                System.out.println("\n" + player1.getSimbol() + " is winner");
+                Console.isWinnerFoundConsole(player1.simbol);
                 showInfo();
                 this.winner = player1;
                 return true;
             }
             if (matrix[i][0] == player2.getSimbol() & matrix[i][1] == player2.getSimbol() & matrix[i][2] == player2.getSimbol()) {
-                System.out.println("\n" + player2.getSimbol() + " is winner");
+                Console.isWinnerFoundConsole(player2.simbol);
                 showInfo();
                 this.winner = player2;
                 return true;
             }
 
             if (matrix[0][i] == player1.getSimbol() & matrix[1][i] == player1.getSimbol() & matrix[2][i] == player1.getSimbol()) {
-                System.out.println("\n" + player1.getSimbol() + " is winner");
+                Console.isWinnerFoundConsole(player1.simbol);
                 showInfo();
                 this.winner = player1;
                 return true;
             }
             if (matrix[0][i] == player2.getSimbol() & matrix[1][i] == player2.getSimbol() & matrix[2][i] == player2.getSimbol()) {
-                System.out.println("\n" + player2.getSimbol() + " is winner");
+                Console.isWinnerFoundConsole(player2.simbol);
                 showInfo();
                 this.winner = player2;
                 return true;
@@ -139,26 +134,26 @@ public class Boarder {
 
         }
         if (matrix[0][0] == player1.getSimbol() & matrix[1][1] == player1.getSimbol() & matrix[2][2] == player1.getSimbol()) {
-            System.out.println("\n" + player1.getSimbol() + " is winner");
+            Console.isWinnerFoundConsole(player1.simbol);
             showInfo();
             this.winner = player1;
             return true;
         }
         if (matrix[0][2] == player1.getSimbol() & matrix[1][1] == player1.getSimbol() & matrix[2][0] == player1.getSimbol()) {
-            System.out.println("\n" + player1.getSimbol() + " is winner");
+            Console.isWinnerFoundConsole(player1.simbol);
             showInfo();
             this.winner = player1;
             return true;
         }
 
         if (matrix[0][0] == player2.getSimbol() & matrix[1][1] == player2.getSimbol() & matrix[2][2] == player2.getSimbol()) {
-            System.out.println("\n" + player2.getSimbol() + " is winner");
+            Console.isWinnerFoundConsole(player2.simbol);
             showInfo();
             this.winner = player2;
             return true;
         }
         if (matrix[0][2] == player2.getSimbol() & matrix[1][1] == player2.getSimbol() & matrix[2][0] == player2.getSimbol()) {
-            System.out.println("\n" + player2.getSimbol() + " is winner");
+            Console.isWinnerFoundConsole(player2.simbol);
             showInfo();
             this.winner = player2;
             return true;

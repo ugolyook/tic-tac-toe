@@ -8,7 +8,7 @@ public class FileManager {
     public FileManager() {
     }
 
-    public void saveData(GameResultDto dto) {
+    public static void saveData(GameResultDto dto) {
         System.out.println("\nStart saving game...");
         try (FileWriter writer = new FileWriter("game_data.txt", true)) {
             writer.write("\nGame data: ");
@@ -37,7 +37,7 @@ public class FileManager {
         }
     }
 
-    public void readData() {
+    public static void readData() {
         System.out.println("\nStart reading data...");
         try (BufferedReader reader = new BufferedReader(new FileReader("game_data.txt"))) {
             String line;

@@ -24,12 +24,18 @@ class Main {
                     printBoard(gameBoard);
                 }
                 case 3 -> {
+                    System.out.println("Let start game:");
                     gameBoard.play();
-                    GameResultDto dto = gameBoard.dto();
-                    fileMenu(file, dto, scanner);
-                    greetings();//main menu
+                    greetings();
                 }
                 case 4 -> {
+                    GameResultDto dto = gameBoard.dto();
+                    FileManager.saveData(dto);
+                }
+                case 5 -> {
+                    FileManager.readData();
+                }
+                case 6 -> {
                     System.out.println("Program finished.");
                     scanner.close();
                     return;
@@ -39,37 +45,15 @@ class Main {
         while (true);
     }
 
-    private static void fileMenu(FileManager fileManager, GameResultDto result, Scanner scanner) {
-        System.out.println("\nWhat u want to do next?");
-        System.out.println("\n1-save data");
-        System.out.println("\n2-read data");
-        System.out.println("\n3-continue");
-        int choice;
-        do {
-        System.out.print("Your choice: ");
-            choice = scanner.nextInt();
-            scanner.nextLine();
-            switch (choice) {
-                case 1 -> {
-                    fileManager.saveData(result);
-                }
-                case 2 -> {
-                    fileManager.readData();
-                }
-                case 3 -> {
-                    System.out.println("\nContinue:");
-                }
-            }
-        } while (choice != 3);
-    }
-
     private static void greetings() {
         System.out.println("Hello players");
         System.out.println("Welcome to the tic-tac-toe!");
         System.out.println("1-Add player");
         System.out.println("2-Show table");
         System.out.println("3-Start game");
-        System.out.println("4-End");
+        System.out.println("4-Save data");
+        System.out.println("5-Read data");
+        System.out.println("6-End");
     }
 
     private static void printBoard(Boarder gameBoard) {
@@ -93,7 +77,8 @@ class Main {
         gamer.simbol = symbolValidator(input, scanner);
 
         System.out.println("Initial data");
-        gamer.showInfo();
+        String data = gamer.toString();
+        System.out.println("Players:" +data);
         return gamer;
     }
 
