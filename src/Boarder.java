@@ -37,8 +37,9 @@ public class Boarder {
         int maxMoveNumbers = (matrix.length * matrix.length);
 
         for (int moveNumber = 0; moveNumber < maxMoveNumbers; moveNumber += 2) {
+            Console console = new Console();
             Console.playConsole(player1.getName());
-            playerMove(player1.getName(), player1.getSimbol());
+            playerMove(player1.getName(), player1.getSimbol(), console);
 
             if (isWinnerFound()) {
                 return;
@@ -47,7 +48,7 @@ public class Boarder {
             if (isDraw(moveNumber, maxMoveNumbers)) return;
 
             Console.playConsole(player2.getName());
-            playerMove(player2.getName(), player2.getSimbol());
+            playerMove(player2.getName(), player2.getSimbol(),console);
 
             if (isDraw(moveNumber, maxMoveNumbers)) return;
 
@@ -72,35 +73,15 @@ public class Boarder {
 
     }
 
-    public void playerMove(String playerName, char playerSimbol) {
+    public void playerMove(String playerName, char playerSimbol, Console console) {
 
-        System.out.println("\nPlayer:" + playerName + " Make your move: ");
-        int i = -1, j = -1;
-        while (true) {
-            System.out.print("\nEnter your i (0-2): ");
-            if (scanner.hasNextInt()) {
-                i = scanner.nextInt();
-                scanner.nextLine();
-            }
-            System.out.print("\nEnter your j (0-2): ");
-            if (scanner.hasNextInt()) {
-                j = scanner.nextInt();
-                scanner.nextLine();
-            }
-            if (i >= 0 && i < matrix.length && j >= 0 && j < matrix.length) {
-                if (matrix[i][j] == '*') {
-                    matrix[i][j] = playerSimbol;
+        int[] move = console.playerMoveConsole(playerName, matrix);
+        int i = move[0];
+        int j = move[1];
+        matrix[i][j] = playerSimbol;
 
-                    System.out.println("\nCurrent board:");
-                    showInfo();
-                    break;
-                } else {
-                    System.out.println("\nCell is already occupied! Choose another one.");
-                }
-            } else {
-                System.out.println("\nCoordinates must be between 0 and 2!");
-            }
-        }
+        System.out.println("\nCurrent board:");
+        showInfo();
     }
 
     public boolean isWinnerFound() {

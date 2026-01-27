@@ -1,11 +1,9 @@
 import java.util.Scanner;
 
 class Main {
-
     static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-
         Boarder gameBoard = null;
         FileManager file = new FileManager();
 
@@ -78,7 +76,7 @@ class Main {
 
         System.out.println("Initial data");
         String data = gamer.toString();
-        System.out.println("Players:" +data);
+        System.out.println("Players:" + data);
         return gamer;
     }
 

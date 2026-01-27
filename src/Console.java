@@ -12,10 +12,10 @@ public class Console {
     }
 
     public static void isDrawConsole() {
-            System.out.println("You have a draw!");
+        System.out.println("You have a draw!");
     }
 
-    public void playerMove(String playerName, char playerSimbol) {
+    public int[] playerMoveConsole(String playerName, char[][] board) {
 
         System.out.println("\nPlayer:" + playerName + " Make your move: ");
         int i = -1, j = -1;
@@ -30,20 +30,18 @@ public class Console {
                 j = scanner.nextInt();
                 scanner.nextLine();
             }
-            if (i >= 0 && i < matrix.length && j >= 0 && j < matrix.length) {
-                if (matrix[i][j] == '*') {
-                    matrix[i][j] = playerSimbol;
-
-                    System.out.println("\nCurrent board:");
-                    showInfo();
+            if (i >= 0 && i < board.length && j >= 0 && j < board.length) {
+                if (board[i][j] == '*') {
                     break;
                 } else {
-                    System.out.println("\nCell is already occupied! Choose another one.");
+                    System.out.println("Cell is already occupied! Choose another one.");
                 }
             } else {
-                System.out.println("\nCoordinates must be between 0 and 2!");
+                System.out.println("Coordinates must be between 0 and 2!");
             }
         }
+
+        return new int[]{i, j};
     }
 
     public static void isWinnerFoundConsole(char winnerSimbol) {
