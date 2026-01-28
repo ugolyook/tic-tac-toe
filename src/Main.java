@@ -4,7 +4,7 @@ class Main {
     static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Boarder gameBoard = null;
+        GameBoard gameBoard = null;
         FileManager file = new FileManager();
 
         greetings();
@@ -16,7 +16,7 @@ class Main {
                 case 1 -> {
                     Player gamer1 = initializePlayers(scanner);
                     Player gamer2 = initializePlayers(scanner);
-                    gameBoard = new Boarder(gamer1, gamer2);
+                    gameBoard = new GameBoard(gamer1, gamer2);
                 }
                 case 2 -> {
                     printBoard(gameBoard);
@@ -27,7 +27,7 @@ class Main {
                     greetings();
                 }
                 case 4 -> {
-                    GameResultDto dto = gameBoard.dto();
+                    GameResultDto dto = gameBoard.toGameResault();
                     FileManager.saveData(dto);
                 }
                 case 5 -> {
@@ -54,10 +54,10 @@ class Main {
         System.out.println("6-End");
     }
 
-    private static void printBoard(Boarder gameBoard) {
+    private static void printBoard(GameBoard gameBoard) {
         if (gameBoard != null) {
             System.out.println("\nCurrent game board:");
-            gameBoard.showInfo();
+            gameBoard.toString();
         } else {
             System.out.println("Board not initialized!");
         }

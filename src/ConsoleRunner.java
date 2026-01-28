@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
-public class Console {
+public class ConsoleRunner {
     private final Scanner scanner;
 
-    public Console() {
+    public ConsoleRunner() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -15,7 +15,7 @@ public class Console {
         System.out.println("You have a draw!");
     }
 
-    public int[] playerMoveConsole(String playerName, char[][] board) {
+    public void playerMoveConsole(String playerName, char[][] board) {
 
         System.out.println("\nPlayer:" + playerName + " Make your move: ");
         int i = -1, j = -1;
@@ -30,18 +30,7 @@ public class Console {
                 j = scanner.nextInt();
                 scanner.nextLine();
             }
-            if (i >= 0 && i < board.length && j >= 0 && j < board.length) {
-                if (board[i][j] == '*') {
-                    break;
-                } else {
-                    System.out.println("Cell is already occupied! Choose another one.");
-                }
-            } else {
-                System.out.println("Coordinates must be between 0 and 2!");
-            }
         }
-
-        return new int[]{i, j};
     }
 
     public static void isWinnerFoundConsole(char winnerSimbol) {
