@@ -2,40 +2,38 @@ import java.util.Scanner;
 
 public class ConsoleRunner {
     private final Scanner scanner;
+    GameBoard board;
 
-    public ConsoleRunner() {
+    public ConsoleRunner(GameBoard board) {
         this.scanner = new Scanner(System.in);
+        this.board = board;
     }
 
-    public static void playConsole(String playerName) {
-        System.out.println("\nPlayer:" + playerName + " give your choice:");
-    }
-
-    public static void isDrawConsole() {
-        System.out.println("You have a draw!");
-    }
-
-    public void playerMoveConsole(String playerName, char[][] board) {
-
-        System.out.println("\nPlayer:" + playerName + " Make your move: ");
-        int i = -1, j = -1;
-        while (true) {
-            System.out.print("\nEnter your i (0-2): ");
-            if (scanner.hasNextInt()) {
-                i = scanner.nextInt();
-                scanner.nextLine();
-            }
-            System.out.print("\nEnter your j (0-2): ");
-            if (scanner.hasNextInt()) {
-                j = scanner.nextInt();
-                scanner.nextLine();
-            }
+    public void play() {
+        while (!board.isWinnerFound() && !board.isDraw()) {
+            int[] move = playerMoveConsole();
+            board.move(move[0], move[1]);                                               //new class
         }
+        if (board.isWinnerFound()) {
+            System.out.println("\n" + board.getWinner() + " is winner\n");
+        } else System.out.println("\nIt is draw!\n");
     }
 
-    public static void isWinnerFoundConsole(char winnerSimbol) {
-
-        System.out.println("\n" + winnerSimbol + " is winner");
-
+    public int[] playerMoveConsole() {
+        int i = -1;
+        int j = -1;
+        System.out.println("\nPlayer:" + board.getCurrentPlayer() + " Make your move: ");
+        System.out.print("\nEnter your i (0-2): ");
+        if (scanner.hasNextInt()) {
+            i = scanner.nextInt();
+            scanner.nextLine();
+        }
+        System.out.print("\nEnter your j (0-2): ");
+        if (scanner.hasNextInt()) {
+            j = scanner.nextInt();
+            scanner.nextLine();
+        }
+        return new int[]{i, j};
     }
+
 }

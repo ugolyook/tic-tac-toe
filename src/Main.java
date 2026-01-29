@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.Scanner; //check
 
 class Main {
     static void main(String[] args) {
@@ -22,8 +22,9 @@ class Main {
                     printBoard(gameBoard);
                 }
                 case 3 -> {
+                    ConsoleRunner consoleRunner = new ConsoleRunner(gameBoard);
                     System.out.println("Let start game:");
-                    gameBoard.play();
+                    consoleRunner.play();
                     greetings();
                 }
                 case 4 -> {
@@ -63,7 +64,7 @@ class Main {
         }
     }
 
-    private static Player initializePlayers(Scanner scanner) {
+    private static Player initializePlayers(Scanner scanner) {                          //ConsoleRunner
         Player gamer = new Player();
 
         System.out.print("Enter gamer name: ");
@@ -72,7 +73,8 @@ class Main {
         System.out.print("Enter gamer simbol(x/o): ");
         String input = scanner.nextLine().trim();
 
-        gamer.simbol = symbolValidator(input, scanner);
+        char simbol = symbolValidator(input, scanner);
+        gamer.setSimbol(simbol);
 
         System.out.println("Initial data");
         String data = gamer.toString();

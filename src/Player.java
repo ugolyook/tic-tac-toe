@@ -1,6 +1,6 @@
 public class Player {
     private String name;
-    char simbol;
+    private char simbol;
 
     public Player() {}
 
@@ -9,6 +9,8 @@ public class Player {
     public void setName(String name) {this.name = name;}
 
     public char getSimbol() {return simbol;}
+
+    public void setSimbol(char simbol) {this.simbol = simbol;}
 
     public String toString() {
         return(name);
