@@ -48,7 +48,11 @@ public class GameBoard {
         return new GameResultDto(player1, player2, matrix, winner);
     }
 
-    public String move(int i, int j) {
+    public String move(Coordinates coordinates) {
+
+        int i = coordinates.i;
+        int j = coordinates.j;
+
         StringBuilder buffer = new StringBuilder();
         Player currentPlayer = getCurrentPlayer();
         if (i >= 0 && i < matrix.length && j >= 0 && j < matrix[i].length) {
@@ -56,10 +60,10 @@ public class GameBoard {
                 matrix[i][j] = currentPlayer.getSimbol();
                 moveCounter++;
             } else {
-                buffer.append("Cell is already occupied! Choose another one.");
+                buffer.append("Cell is already occupied! Choose another one."); //exception
             }
         } else {
-            buffer.append("Coordinates must be in range [0;" + matrix.length + ")");
+            buffer.append("Coordinates must be in range [0;").append(matrix.length).append(")");
         }
         return buffer.toString();
     }

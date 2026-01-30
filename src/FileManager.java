@@ -24,7 +24,7 @@ public class FileManager {
                 writer.write("\n");
             }
 
-            if (dto.winner.getName() != null) {
+            if (dto.winner != null) {
                 writer.write("\nWinner: " + dto.winner.getName() + "\n");
             } else {
                 writer.write("\nDraw!!!");

@@ -1,11 +1,10 @@
-import java.util.Scanner; //check
+import java.util.Scanner;
 
 class Main {
     static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         GameBoard gameBoard = null;
-        FileManager file = new FileManager();
 
         greetings();
         do {
@@ -14,8 +13,8 @@ class Main {
             scanner.nextLine();
             switch (option) {
                 case 1 -> {
-                    Player gamer1 = initializePlayers(scanner);
-                    Player gamer2 = initializePlayers(scanner);
+                    Player gamer1 = ConsoleRunner.initializePlayers(scanner);
+                    Player gamer2 = ConsoleRunner.initializePlayers(scanner);
                     gameBoard = new GameBoard(gamer1, gamer2);
                 }
                 case 2 -> {
@@ -58,39 +57,10 @@ class Main {
     private static void printBoard(GameBoard gameBoard) {
         if (gameBoard != null) {
             System.out.println("\nCurrent game board:");
-            gameBoard.toString();
+            System.out.println(gameBoard);
         } else {
             System.out.println("Board not initialized!");
         }
     }
 
-    private static Player initializePlayers(Scanner scanner) {                          //ConsoleRunner
-        Player gamer = new Player();
-
-        System.out.print("Enter gamer name: ");
-        gamer.setName(scanner.nextLine().toLowerCase());
-
-        System.out.print("Enter gamer simbol(x/o): ");
-        String input = scanner.nextLine().trim();
-
-        char simbol = symbolValidator(input, scanner);
-        gamer.setSimbol(simbol);
-
-        System.out.println("Initial data");
-        String data = gamer.toString();
-        System.out.println("Players:" + data);
-        return gamer;
-    }
-
-    private static char symbolValidator(String input, Scanner scanner) {
-        if ((input.length() != 1) || (input.charAt(0) != 'x' && input.charAt(0) != 'o')) {
-            System.out.println("\nTry again...");
-            System.out.print("\nEnter gamer simbol (x/o): ");
-            input = scanner.nextLine().trim();
-
-            return symbolValidator(input, scanner);
-        } else {
-            return input.charAt(0);
-        }
-    }
 }
