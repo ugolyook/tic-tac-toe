@@ -1,6 +1,6 @@
 public class Player {
     private String name;
-    char simbol;
+    private char simbol;
 
     public Player() {}
 
@@ -10,7 +10,9 @@ public class Player {
 
     public char getSimbol() {return simbol;}
 
-    public void showInfo() {
-        System.out.println("Gamer name:" + getName() + "\nGamer simbol:" + getSimbol());
+    public void setSimbol(char simbol) {this.simbol = simbol;}
+
+    public String toString() {
+        return(name);
     }
 }
