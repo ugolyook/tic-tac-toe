@@ -10,12 +10,20 @@ public class ConsoleRunner {
     }
 
     public void play() {
+
+        Player gamer1 = initializePlayers(scanner);
+        Player gamer2 = initializePlayers(scanner);
+        board = new GameBoard(gamer1, gamer2);
+
         while (!board.isWinnerFound() && !board.isDraw()) {
             System.out.println("\nCurrent game board:");
             System.out.println(board.toString());
             var coordinates = getPlayerMoveCoordinates();
-            String errorMassage = board.move(coordinates);
-            System.out.println(errorMassage); //check
+            try {
+                board.move(coordinates);
+            } catch (InvalidMoveException e) {
+                System.out.println(e.getMessage());
+            }
         }
         if (board.isWinnerFound()) {
             System.out.println("\n" + board.getWinner().getName() + " is winner\n");

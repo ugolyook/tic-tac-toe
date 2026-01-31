@@ -8,7 +8,7 @@ If both **players** agree, it's ok; if even one player disagrees, it's over.
 
 ### TODO:
 
-[ ] loops foreach  
-[ ] Move init into ConsoleRunner  
+[x] loops foreach  
+[x] Move init into ConsoleRunner  
 [ ] Exceptions  
-[ ] Check errorMassage
+[x] Check errorMassage

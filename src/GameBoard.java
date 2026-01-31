@@ -1,3 +1,9 @@
+class InvalidMoveException extends Exception {
+    public InvalidMoveException(String message) {
+        super(message);
+    }
+}
+
 public class GameBoard {
     private final char[][] matrix;
     private final Player player1;
@@ -23,9 +29,9 @@ public class GameBoard {
 
     public String toString() {
         StringBuilder buffer = new StringBuilder();
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                buffer.append(matrix[i][j]).append(" ");
+        for (char[] chars : matrix) {
+            for (char aChar : chars) {
+                buffer.append(aChar).append(" ");
             }
             buffer.append("\n");
         }
@@ -33,9 +39,9 @@ public class GameBoard {
     }
 
     public boolean isDraw() {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == '*') return false;
+        for (char[] chars : matrix) {
+            for (char aChar : chars) {
+                if (aChar == '*') return false;
             }
         }
         return true;
@@ -48,24 +54,27 @@ public class GameBoard {
         return new GameResultDto(player1, player2, matrix, winner);
     }
 
-    public String move(Coordinates coordinates) {
+    public void move(Coordinates coordinates) throws InvalidMoveException {
 
         int i = coordinates.i;
         int j = coordinates.j;
 
-        StringBuilder buffer = new StringBuilder();
-        Player currentPlayer = getCurrentPlayer();
-        if (i >= 0 && i < matrix.length && j >= 0 && j < matrix[i].length) {
-            if (matrix[i][j] == '*') {
-                matrix[i][j] = currentPlayer.getSimbol();
-                moveCounter++;
-            } else {
-                buffer.append("Cell is already occupied! Choose another one."); //exception
-            }
-        } else {
-            buffer.append("Coordinates must be in range [0;").append(matrix.length).append(")");
+        if (i < 0 || i >= matrix.length || j < 0 || j >= matrix[i].length) {
+            throw new InvalidMoveException(
+                    "Coordinates must be in range [0;" + (matrix.length - 1) + "]"
+            );
         }
-        return buffer.toString();
+
+        if (matrix[i][j] != '*') {
+            throw new InvalidMoveException(
+                    "Cell [" + i + "," + j + "] is already occupied! Choose another one."
+            );
+        }
+
+        Player currentPlayer = getCurrentPlayer();
+        matrix[i][j] = currentPlayer.getSimbol();
+        moveCounter++;
+
     }
 
     public Player getWinner() {

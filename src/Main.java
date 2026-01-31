@@ -12,28 +12,24 @@ class Main {
             int option = scanner.nextInt();
             scanner.nextLine();
             switch (option) {
+
                 case 1 -> {
-                    Player gamer1 = ConsoleRunner.initializePlayers(scanner);
-                    Player gamer2 = ConsoleRunner.initializePlayers(scanner);
-                    gameBoard = new GameBoard(gamer1, gamer2);
-                }
-                case 2 -> {
                     printBoard(gameBoard);
                 }
-                case 3 -> {
+                case 2 -> {
                     ConsoleRunner consoleRunner = new ConsoleRunner(gameBoard);
                     System.out.println("Let start game:");
                     consoleRunner.play();
                     greetings();
                 }
-                case 4 -> {
+                case 3 -> {
                     GameResultDto dto = gameBoard.toGameResault();
                     FileManager.saveData(dto);
                 }
-                case 5 -> {
+                case 4 -> {
                     FileManager.readData();
                 }
-                case 6 -> {
+                case 5 -> {
                     System.out.println("Program finished.");
                     scanner.close();
                     return;
@@ -46,12 +42,11 @@ class Main {
     private static void greetings() {
         System.out.println("Hello players");
         System.out.println("Welcome to the tic-tac-toe!");
-        System.out.println("1-Add player");
-        System.out.println("2-Show table");
-        System.out.println("3-Start game");
-        System.out.println("4-Save data");
-        System.out.println("5-Read data");
-        System.out.println("6-End");
+        System.out.println("1-Show table");
+        System.out.println("2-Start game");
+        System.out.println("3-Save data");
+        System.out.println("4-Read data");
+        System.out.println("5-End");
     }
 
     private static void printBoard(GameBoard gameBoard) {
