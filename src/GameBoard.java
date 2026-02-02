@@ -47,7 +47,7 @@ public class GameBoard {
         return true;
     }
 
-    public GameResultDto toGameResault() {
+    public GameResultDto toGameResult() {
         if (isDraw()) {
             return new GameResultDto(player1, player2, matrix);
         }

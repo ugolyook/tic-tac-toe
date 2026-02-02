@@ -76,4 +76,8 @@ public class ConsoleRunner {
             return input.charAt(0);
         }
     }
+
+    public GameBoard getBoard() {
+        return board;
+    }
 }

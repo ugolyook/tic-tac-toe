@@ -20,11 +20,15 @@ class Main {
                     ConsoleRunner consoleRunner = new ConsoleRunner(gameBoard);
                     System.out.println("Let start game:");
                     consoleRunner.play();
+                    gameBoard=consoleRunner.getBoard();
                     greetings();
                 }
                 case 3 -> {
-                    GameResultDto dto = gameBoard.toGameResault();
-                    FileManager.saveData(dto);
+                    if (gameBoard != null) {
+                        FileManager.saveData(gameBoard.toGameResult());
+                    } else {
+                        System.out.println("No game to save!");
+                    }
                 }
                 case 4 -> {
                     FileManager.readData();
