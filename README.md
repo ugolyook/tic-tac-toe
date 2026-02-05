@@ -5,3 +5,14 @@ If either of the two results reaches 3:1 or 3:2, the player wins; otherwise, it'
 
 They play one game, then the question of whether to continue is asked. 
 If both **players** agree, it's ok; if even one player disagrees, it's over.
+
+### TODO:
+
+[x] loops foreach  
+[x] Move init into com.sveta.core.ConsoleRunner  
+[x] Exceptions  
+[x] Check errorMassage
+[х] Constant in files
+[х] RuntimeException
+[ ] Debug
+[х] Regex
