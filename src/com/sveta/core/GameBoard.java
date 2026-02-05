@@ -1,8 +1,9 @@
-class InvalidMoveException extends Exception {
-    public InvalidMoveException(String message) {
-        super(message);
-    }
-}
+package com.sveta.core;
+
+import com.sveta.exception.InvalidMoveException;
+import com.sveta.model.Coordinates;
+import com.sveta.model.GameResultDto;
+import com.sveta.model.Player;
 
 public class GameBoard {
     private final char[][] matrix;
@@ -61,7 +62,7 @@ public class GameBoard {
 
         if (i < 0 || i >= matrix.length || j < 0 || j >= matrix[i].length) {
             throw new InvalidMoveException(
-                    "Coordinates must be in range [0;" + (matrix.length - 1) + "]"
+                    "com.sveta.models.Coordinates must be in range [0;" + (matrix.length - 1) + "]"
             );
         }
 

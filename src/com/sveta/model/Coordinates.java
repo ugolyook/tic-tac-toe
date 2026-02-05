@@ -1,3 +1,5 @@
+package com.sveta.model;
+
 public class Coordinates {
     public int i;
     public int j;

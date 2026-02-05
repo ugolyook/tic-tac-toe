@@ -1,12 +1,17 @@
+package com.sveta.core;
+
+import com.sveta.exception.InvalidMoveException;
+import com.sveta.model.Coordinates;
+import com.sveta.model.Player;
+
 import java.util.Scanner;
 
 public class ConsoleRunner {
     private final Scanner scanner;
     GameBoard board;
 
-    public ConsoleRunner(GameBoard board) {
+    public ConsoleRunner() {
         this.scanner = new Scanner(System.in);
-        this.board = board;
     }
 
     public void play() {
@@ -18,7 +23,7 @@ public class ConsoleRunner {
         while (!board.isWinnerFound() && !board.isDraw()) {
             System.out.println("\nCurrent game board:");
             System.out.println(board.toString());
-            var coordinates = getPlayerMoveCoordinates();
+            var coordinates = getPlayerMoveCoordinates();  ////////////////////////
             try {
                 board.move(coordinates);
             } catch (InvalidMoveException e) {
@@ -33,7 +38,7 @@ public class ConsoleRunner {
     public Coordinates getPlayerMoveCoordinates() {
         int i = -1;
         int j = -1;
-        System.out.println("\nPlayer:" + board.getCurrentPlayer() + " Make your move: ");
+        System.out.println("\ncom.sveta.model.Player:" + board.getCurrentPlayer() + " Make your move: ");
         System.out.print("\nEnter your i (0-2): ");
         if (scanner.hasNextInt()) {
             i = scanner.nextInt();

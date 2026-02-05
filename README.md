@@ -9,6 +9,10 @@ If both **players** agree, it's ok; if even one player disagrees, it's over.
 ### TODO:
 
 [x] loops foreach  
-[x] Move init into ConsoleRunner  
-[ ] Exceptions  
+[x] Move init into com.sveta.core.ConsoleRunner  
+[x] Exceptions  
 [x] Check errorMassage
+[х] Constant in files
+[х] RuntimeException
+[ ] Debug
+[х] Regex
