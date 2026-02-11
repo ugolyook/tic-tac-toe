@@ -22,6 +22,10 @@ public class GameResultDto {
         this.finalBoard = finalBoard;
     }
 
+    public char[][] getFinalBoard() {
+        return finalBoard;
+    }
+
     public Player getWinner() {
         return winner;
     }
@@ -41,9 +45,9 @@ public class GameResultDto {
 
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < finalBoard.length; i++) {
-            for (int j = 0; j < finalBoard[i].length; j++) {
-                sb.append(finalBoard[i][j]).append(" ");
+        for (char[] chars : finalBoard) {
+            for (char aChar : chars) {
+                sb.append(aChar).append(" ");
             }
             sb.append("\n");
         }
@@ -57,10 +61,6 @@ public class GameResultDto {
 
     public Player getPlayer2() {
         return player2;
-    }
-
-    public char[][] getFinalBoard() {
-        return finalBoard;
     }
 }
 

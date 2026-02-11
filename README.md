@@ -14,5 +14,5 @@ If both **players** agree, it's ok; if even one player disagrees, it's over.
 [x] Check errorMassage
 [х] Constant in files
 [х] RuntimeException
-[ ] Debug
+[х] Debug
 [х] Regex
