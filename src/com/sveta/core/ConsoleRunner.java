@@ -15,7 +15,6 @@ public class ConsoleRunner {
     }
 
     public void play() {
-
         Player gamer1 = initializePlayers(scanner);
         Player gamer2 = initializePlayers(scanner);
         board = new GameBoard(gamer1, gamer2);
@@ -23,16 +22,20 @@ public class ConsoleRunner {
         while (!board.isWinnerFound() && !board.isDraw()) {
             System.out.println("\nCurrent game board:");
             System.out.println(board.toString());
-            var coordinates = getPlayerMoveCoordinates();  ////////////////////////
-            try {
-                board.move(coordinates);
-            } catch (InvalidMoveException e) {
-                System.out.println(e.getMessage());
-            }
+            toMoveCoordinates();
         }
         if (board.isWinnerFound()) {
             System.out.println("\n" + board.getWinner().getName() + " is winner\n");
         } else System.out.println("\nIt is draw!\n");
+    }
+
+    private void toMoveCoordinates() {
+        var coordinates = getPlayerMoveCoordinates();
+        try {
+            board.move(coordinates);
+        } catch (InvalidMoveException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Coordinates getPlayerMoveCoordinates() {
@@ -52,7 +55,7 @@ public class ConsoleRunner {
         return new Coordinates(i, j);
     }
 
-    public static Player initializePlayers(Scanner scanner) {
+    public Player initializePlayers(Scanner scanner) {
         Player gamer = new Player();
 
         System.out.print("Enter gamer name: ");
@@ -70,7 +73,7 @@ public class ConsoleRunner {
         return gamer;
     }
 
-    private static char symbolValidator(String input, Scanner scanner) {
+    private char symbolValidator(String input, Scanner scanner) {
         if ((input.length() != 1) || (input.charAt(0) != 'x' && input.charAt(0) != 'o')) {
             System.out.println("\nTry again...");
             System.out.print("\nEnter gamer simbol (x/o): ");

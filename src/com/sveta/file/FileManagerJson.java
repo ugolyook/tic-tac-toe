@@ -1,5 +1,6 @@
 package com.sveta.file;
 
+import com.sveta.impl.FileImpl;
 import com.sveta.model.Player;
 import com.sveta.model.GameResultDto;
 
@@ -8,13 +9,12 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileManagerJson {
+public class FileManagerJson implements FileImpl {
     private static final String FILE_NAME = "game_data.json";
     private static final String FIRST_GAMER = "1 Gamer";
     private static final String SECOND_GAMER = "2 Gamer";
     private static final String FINAL_BOARD = "Final board";
     private static final String WINNER = "Winner";
-    private static final String COLON = ":";
     private static final String NEXT_LINE_POINTER = "\n";
 
     public FileManagerJson() {
@@ -26,7 +26,7 @@ public class FileManagerJson {
         try (FileWriter writer = new FileWriter(FILE_NAME)) {
 
             writer.write("{" + NEXT_LINE_POINTER);
-            writer.write("  \"" + FIRST_GAMER + "\" \"" + dto.getPlayer1().getName() + "\"," + NEXT_LINE_POINTER);
+            writer.write("  \"" + FIRST_GAMER + "\": \"" + dto.getPlayer1().getName() + "\"," + NEXT_LINE_POINTER);
             writer.write("  \"" + SECOND_GAMER + "\": \"" + dto.getPlayer2().getName() + "\"," + NEXT_LINE_POINTER);
 
             writer.write("  \"" + FINAL_BOARD + "\": [" + NEXT_LINE_POINTER);
@@ -62,7 +62,7 @@ public class FileManagerJson {
     }
 
 
-    public static GameResultDto readData() {
+    public GameResultDto readData() {
         System.out.println("Start reading JSON data...");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
@@ -128,7 +128,7 @@ public class FileManagerJson {
 
         String boardContent = json.substring(start + 1, end);
 
-        String[] rows = boardContent.split("\\],\\[");
+        String[] rows = boardContent.split("],\\[");
 
         for (int i = 0; i < rows.length; i++) {
             String row = rows[i].replace("[", "").replace("]", "");

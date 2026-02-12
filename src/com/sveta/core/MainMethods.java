@@ -1,32 +1,34 @@
 package com.sveta.core;
 
 import com.sveta.file.FileManager;
+import com.sveta.file.FileManagerJson;
 
 public class MainMethods {
 
-    MainMethods(){}
+    public MainMethods(){}
 
-    public static void toSaveData(GameBoard gameBoard) {
+    public void toSaveData(GameBoard gameBoard) {
         if (gameBoard != null) {
-            FileManager fileManager = new FileManager();
-            fileManager.saveData(gameBoard.toGameResult());
+            FileManagerJson fileManagerJson = new FileManagerJson();
+            fileManagerJson.saveData(gameBoard.toGameResult());
         } else {
             System.out.println("No game to save!");
         }
     }
 
-    public static void toClose() {
+    public boolean toClose() {
         System.out.println("Program finished.");
+        return true;
     }
 
-    public static GameBoard toPlay() {
+    public GameBoard toPlay() {
         ConsoleRunner consoleRunner = new ConsoleRunner();
         System.out.println("Let start game:");
         consoleRunner.play();
         return consoleRunner.getBoard();
     }
 
-    public static void showMenuList() {
+    public  void showMenuList() {
         System.out.println("Hello players");
         System.out.println("Welcome to the tic-tac-toe!");
         System.out.println("1-Show table");
@@ -36,7 +38,7 @@ public class MainMethods {
         System.out.println("5-End");
     }
 
-    public static void printBoard(GameBoard gameBoard) {
+    public void printBoard(GameBoard gameBoard) {
         if (gameBoard != null) {
             System.out.println("\nCurrent game board:");
             System.out.println(gameBoard);

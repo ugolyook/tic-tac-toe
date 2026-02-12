@@ -1,5 +1,6 @@
 package com.sveta.file;
 
+import com.sveta.impl.FileImpl;
 import com.sveta.model.Player;
 import com.sveta.model.GameResultDto;
 
@@ -8,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileManager {
+public class FileManager implements FileImpl {
     private static final String FILE_NAME = "game_data.txt";
     private static final String FIRST_GAMER = "1 Gamer";
     private static final String SECOND_GAMER = "2 Gamer";
@@ -50,7 +51,7 @@ public class FileManager {
         }
     }
 
-    public static GameResultDto readData() {
+    public GameResultDto readData() {
         System.out.println("Start reading data...");
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
 

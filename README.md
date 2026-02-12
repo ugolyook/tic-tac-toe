@@ -16,3 +16,9 @@ If both **players** agree, it's ok; if even one player disagrees, it's over.
 [х] RuntimeException
 [х] Debug
 [х] Regex
+[х] Not static
+[х] Interface
+[ ] 10 
+[ ] Add new field with game date (new) java.time, Instant, LocalDateTime, LocalDate, parse date from string
+  + time, operation with it, UTC, ZoneDateTime
+[ ] Implementation sort for GameResaultDto
