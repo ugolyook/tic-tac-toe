@@ -11,14 +11,21 @@ If both **players** agree, it's ok; if even one player disagrees, it's over.
 [x] loops foreach  
 [x] Move init into com.sveta.core.ConsoleRunner  
 [x] Exceptions  
-[x] Check errorMassage
-[х] Constant in files
-[х] RuntimeException
-[х] Debug
-[х] Regex
-[х] Not static
-[х] Interface
-[ ] 10 
+[x] Check errorMassage  
+[х] Constant in files  
+[х] RuntimeException  
+[х] Debug  
+[х] Regex  
+
+[х] Not static  
+[х] Interface  
+[ ] 10   
 [ ] Add new field with game date (new) java.time, Instant, LocalDateTime, LocalDate, parse date from string
-  + time, operation with it, UTC, ZoneDateTime
-[ ] Implementation sort for GameResaultDto
+  + time, operation with it, UTC, ZoneDateTime  
+[ ] Implementation sort for GameResaultDto  
+[ ] Collection API, List: ArrayList, LinkedList  
+[ ] Queue, Deque  
+[ ] Set  
+[ ] Map  
+[ ] What interface and what implementation, diagram  
+[ ] Collection and O(n)

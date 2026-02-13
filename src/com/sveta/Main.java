@@ -2,8 +2,7 @@ package com.sveta;
 
 import com.sveta.core.GameBoard;
 import com.sveta.core.MainMethods;
-import com.sveta.file.FileManager;
-import com.sveta.file.FileManagerJson;
+import com.sveta.file.impl.FileManagerJson;
 
 import java.util.Scanner;
 
