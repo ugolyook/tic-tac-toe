@@ -23,9 +23,9 @@ If both **players** agree, it's ok; if even one player disagrees, it's over.
 [ ] Add new field with game date (new) java.time, Instant, LocalDateTime, LocalDate, parse date from string
   + time, operation with it, UTC, ZoneDateTime  
 [ ] Implementation sort for GameResaultDto  
-[ ] Collection API, List: ArrayList, LinkedList  
+[х] Collection API, List: ArrayList, LinkedList  
 [ ] Queue, Deque  
-[ ] Set  
-[ ] Map  
+[х] Set  
+[х] Map  
 [ ] What interface and what implementation, diagram  
 [ ] Collection and O(n)

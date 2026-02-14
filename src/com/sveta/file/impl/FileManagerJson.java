@@ -6,6 +6,8 @@ import com.sveta.file.FileManager;
 import com.sveta.model.GameResultDto;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileManagerJson implements FileManager {
 
@@ -28,15 +30,17 @@ public class FileManagerJson implements FileManager {
     }
 
     @Override
-    public GameResultDto readData() {
+    public List<GameResultDto> readData() {
         System.out.println("Start reading JSON...");
 
         try (Reader reader = new FileReader(FILE_NAME)) {
-
             GameResultDto dto = gson.fromJson(reader, GameResultDto.class);
 
+            ArrayList<GameResultDto> list = new ArrayList<>();
+            list.add(dto);
+
             System.out.println("JSON successfully read!");
-            return dto;
+            return list;
         } catch (IOException e) {
             System.out.println("Error reading JSON: " + e.getMessage());
         }

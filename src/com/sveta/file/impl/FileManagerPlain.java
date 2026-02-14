@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileManagerPlain implements FileManager {
     private static final String FILE_NAME = "game_data.txt";
@@ -26,9 +28,6 @@ public class FileManagerPlain implements FileManager {
             %s: %s
             """;
     private static final String NEXT_LINE_POINTER = "\n";
-
-    public FileManagerPlain() {
-    }
 
     public void saveData(GameResultDto dto) {
         System.out.println(NEXT_LINE_POINTER + "Start saving game...");
@@ -51,7 +50,7 @@ public class FileManagerPlain implements FileManager {
         }
     }
 
-    public GameResultDto readData() {
+    public List<GameResultDto> readData() {
         System.out.println("Start reading data...");
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
 
@@ -62,19 +61,8 @@ public class FileManagerPlain implements FileManager {
 
             while ((line = reader.readLine()) != null) {
 
-                if (line.startsWith(FIRST_GAMER)) {         // extract into a separated method
-                    String[] parts = line.split(COLON, 2);
-                    if (parts.length > 1) {
-                        p1Name = parts[1].trim();
-                    }
-                }
-
-                if (line.startsWith(SECOND_GAMER)) {  // extract into a separated method
-                    String[] parts = line.split(COLON, 2);
-                    if (parts.length > 1) {
-                        p2Name = parts[1].trim();
-                    }
-                }
+                p1Name = ifGamer(line, p1Name, FIRST_GAMER);
+                p2Name = ifGamer(line, p2Name, SECOND_GAMER);
 
                 if (line.startsWith(FINAL_BOARD)) {
                     int rowIndex = 0;
@@ -112,10 +100,22 @@ public class FileManagerPlain implements FileManager {
 
             System.out.println("Data is successfully read!");
 
-            return new GameResultDto(player1, player2, board, winner);
+            ArrayList<GameResultDto> list = new ArrayList<>();
+            list.add(new GameResultDto(player1, player2, board, winner));
+            return list;
         } catch (IOException e) {
             System.out.println("Error with reading: " + e.getMessage());
         }
         return null;
+    }
+
+    private static String ifGamer(String line, String name, String gamerTag) {
+        if (line.startsWith(gamerTag)) {
+            String[] parts = line.split(COLON, 2);
+            if (parts.length > 1) {
+                name = parts[1].trim();
+            }
+        }
+        return name;
     }
 }
