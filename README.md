@@ -9,7 +9,7 @@ If both **players** agree, it's ok; if even one player disagrees, it's over.
 ### TODO:
 
 [x] loops foreach  
-[x] Move init into com.sveta.core.ConsoleRunner  
+[x] M ove init into com.sveta.core.ConsoleRunner  
 [x] Exceptions  
 [x] Check errorMassage  
 [х] Constant in files  
@@ -24,8 +24,8 @@ If both **players** agree, it's ok; if even one player disagrees, it's over.
   + time, operation with it, UTC, ZoneDateTime  
 [ ] Implementation sort for GameResaultDto  
 [х] Collection API, List: ArrayList, LinkedList  
-[ ] Queue, Deque  
+[х] Queue, Deque  
 [х] Set  
 [х] Map  
-[ ] What interface and what implementation, diagram  
-[ ] Collection and O(n)
+[х] What interface and what implementation, diagram  
+[х] Collection and O(n)

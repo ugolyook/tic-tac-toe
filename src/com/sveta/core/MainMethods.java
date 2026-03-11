@@ -9,7 +9,7 @@ public class MainMethods {
     }
 
     public void toSaveData(GameBoard gameBoard) {
-        if (gameBoard != null) {
+        if (gameBoard != null) {//historyManager -> fileManager->data
             FileManager manager = new FileManagerJson();
             manager.saveData(gameBoard.toGameResult());
         } else {

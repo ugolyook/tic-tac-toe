@@ -31,6 +31,7 @@ public class FileManagerPlain implements FileManager {
 
     public void saveData(GameResultDto dto) {
         System.out.println(NEXT_LINE_POINTER + "Start saving game...");
+
         try (FileWriter writer = new FileWriter(FILE_NAME, true)) {
             writer.write(NEXT_LINE_POINTER + "Game data: " + NEXT_LINE_POINTER); //
 
