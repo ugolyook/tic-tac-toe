@@ -13,7 +13,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
         table = (Node<K, V>[]) new Node[CAPACITY];
     }
 
-    static class Node<K, V> implements Entry<K, V>, Iterable<Node<K, V>> {
+    public static class Node<K, V> implements Entry<K, V>, Iterable<Node<K, V>> {
         final K key;
         V value;
         Node<K, V> next;
@@ -24,7 +24,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
             this.key = key;
         }
 
-        Node(K key, V value) {
+        public Node(K key, V value) {
             this.key = key;
             this.value = value;
         }

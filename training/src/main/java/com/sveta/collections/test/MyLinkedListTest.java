@@ -1,18 +1,20 @@
-package com.sveta.collections.list;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import java.util.*;
+package com.sveta.collections.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MyArrayListTest {
+import com.sveta.collections.list.MyLinkedList;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.Collection;
+import java.util.List;
+
+class MyLinkedListTest {
 
     @Test
     void isEmpty_listEmpty_expectTrue() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
 
         // when
         boolean result = list.isEmpty();
@@ -24,7 +26,7 @@ class MyArrayListTest {
     @Test
     void isEmpty_listIsNotEmpty_expectFalse() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Potato");
 
         // when
@@ -37,7 +39,7 @@ class MyArrayListTest {
     @Test
     void size_sizeZero_expectedZero() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
 
         // when
         int result = list.size();
@@ -49,7 +51,7 @@ class MyArrayListTest {
     @Test
     void size_sizeOne_expectedOne() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Cat");
 
         // when
@@ -62,7 +64,7 @@ class MyArrayListTest {
     @Test
     void contains_listContainsElement_expectedTrue() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Cat");
 
         // when
@@ -75,7 +77,7 @@ class MyArrayListTest {
     @Test
     void contains_listIsNotContainsElement_expectedFalse() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Dog");
 
         // when
@@ -86,9 +88,23 @@ class MyArrayListTest {
     }
 
     @Test
+    void contains_elementContainZero_expectedTrue() {
+        // given
+        List<String> list = new MyLinkedList<>();
+        list.add("Frog");
+        list.add(null);
+
+        // when
+        boolean result = list.contains(null);
+
+        // then
+        Assertions.assertTrue(result);
+    }
+
+    @Test
     void add_listAddElement_expectedTrue() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
 
         // when
         list.add("Dog");
@@ -99,9 +115,52 @@ class MyArrayListTest {
     }
 
     @Test
+    void add_lastIsNull_expectedTrue() {
+        // given
+        List<String> list = new MyLinkedList<>();
+
+        // when
+        list.addFirst("Dog");
+
+        // then
+        boolean result = list.contains("Dog");
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    void add_lastIsNotNull_expectedTrue() {
+        // given
+        List<String> list = new MyLinkedList<>();
+        list.add("Frog");
+        list.add("Duck");
+
+        // when
+        list.add(2,"Dog");
+
+        // then
+        boolean result = list.contains("Dog");
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    void add_IndexIsNull_expectedTrue() {
+        // given
+        List<String> list = new MyLinkedList<>();
+        list.add("Frog");
+        list.add("Duck");
+
+        // when
+        list.add(0,"Dog");
+
+        // then
+        boolean result = list.contains("Dog");
+        Assertions.assertTrue(result);
+    }
+
+    @Test
     void remove_listRemoveElement_expectedTrue() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
 
         // when
@@ -116,7 +175,7 @@ class MyArrayListTest {
     @Test
     void remove_listNotFoundElement_expectedFalse() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
 
         // when
@@ -127,9 +186,37 @@ class MyArrayListTest {
     }
 
     @Test
+    void remove_currentPrevNotZero_expectedTrue() {
+        // given
+        List<String> list = new MyLinkedList<>();
+        list.add("Cat");
+        list.add("Frog");
+
+        // when
+        boolean result = list.remove("Frog");
+
+        // then
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    void remove_currentNextNotZero_expectedTrue() {
+        // given
+        List<String> list = new MyLinkedList<>();
+        list.add("Frog");
+        list.add("Goat");
+
+        // when
+        boolean result = list.remove("Frog");
+
+        // then
+        Assertions.assertTrue(result);
+    }
+
+    @Test
     void clear_listIsClear_expectedZero() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
 
         // when
@@ -143,7 +230,7 @@ class MyArrayListTest {
     @Test
     void get_indexOutOfBond_expectException() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
 
         // when
@@ -153,13 +240,13 @@ class MyArrayListTest {
         );
 
         // then
-        assertEquals("Index out of range: 2", exception.getMessage());
+        assertEquals("Index: 2, Size: 1", exception.getMessage());
     }
 
     @Test
     void get_existingIndex_expectElement() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
 
         // when
@@ -172,7 +259,7 @@ class MyArrayListTest {
     @Test
     void get_negativeIndex_expectException() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
 
         // when
@@ -182,13 +269,13 @@ class MyArrayListTest {
         );
 
         // then
-        assertEquals("Index out of range: -1", exception.getMessage());
+        assertEquals("Index: -1, Size: 1", exception.getMessage());
     }
 
     @Test
     void set_setNewElement_expectPreviousElement() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
 
         // when
@@ -202,7 +289,7 @@ class MyArrayListTest {
     @Test
     void set_elementIndexOutOfBond_expectException() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
 
         // when
         var exception = assertThrows(
@@ -211,13 +298,13 @@ class MyArrayListTest {
         );
 
         // then
-        assertEquals("Index out of range: 10", exception.getMessage());
+        assertEquals("Index: 10, Size: 0", exception.getMessage());
     }
 
     @Test
     void add_addElementOutOfRange_expectException() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
 
         // when
         var exception = assertThrows(IndexOutOfBoundsException.class,
@@ -225,13 +312,13 @@ class MyArrayListTest {
         );
 
         // then
-        assertEquals("Index out of range: 100", exception.getMessage());
+        assertEquals("Index: 100, Size: 0", exception.getMessage());
     }
 
     @Test
     void add_addElement_expectElement() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Cat");
         list.add("Dog");
         list.add("Frog");
@@ -247,7 +334,7 @@ class MyArrayListTest {
     @Test
     void add_elementIndexOutOfBond_expectException() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
 
         // when
         var exception = assertThrows(
@@ -256,13 +343,13 @@ class MyArrayListTest {
         );
 
         // then
-        assertEquals("Index out of range: -10", exception.getMessage());
+        assertEquals("Index: -10, Size: 0", exception.getMessage());
     }
 
     @Test
     void testAdd_testCapacity_expectCapacity() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Fro");
 
         // when
@@ -276,11 +363,11 @@ class MyArrayListTest {
     @Test
     void testRemove_removeElement_expectPrevElement() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
 
         // when
-        String result = list.remove(0);
+        String result = list.removeFirst();
 
         // then
         Assertions.assertEquals("Frog", result);
@@ -289,7 +376,7 @@ class MyArrayListTest {
     @Test
     void testRemove_elementIndexOutOfBond_expectException() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
 
         // when
@@ -299,13 +386,13 @@ class MyArrayListTest {
         );
 
         // then
-        assertEquals("Index out of range: 10", exception.getMessage());
+        assertEquals("Index: 10, Size: 1", exception.getMessage());
     }
 
     @Test
     void indexOf_findElementByName_expectIndex() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frogs");
         list.add("Frog");
         list.add("Frogg");
@@ -321,7 +408,7 @@ class MyArrayListTest {
     @Test
     void indexOf_notFindElementByName_expectMinusOne() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
 
         // when
@@ -334,7 +421,7 @@ class MyArrayListTest {
     @Test
     void lastIndexOf_returnLastIndexOfElement_expectIndex() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Frog");
         list.add("Frogg");
         list.add("Frog");
@@ -350,7 +437,7 @@ class MyArrayListTest {
     @Test
     void lastIndexOf_notFindLastIndexOfElement_expectMinusOne() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Rabbit");
 
         // when
@@ -361,23 +448,9 @@ class MyArrayListTest {
     }
 
     @Test
-    void testToString_returnString_expectString() {
-        // given
-        List<String> list = new MyArrayList();
-        list.add("Hello");
-        list.add("World");
-
-        // when
-        String result = list.toString();
-
-        // then
-        Assertions.assertEquals("Hello\nWorld\n", result);
-    }
-
-    @Test
     void toArray_transformFromListToArray_expectArray() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Hello");
         list.add("World");
 
@@ -393,7 +466,7 @@ class MyArrayListTest {
     @Test
     void testToArray_transformFromListToArray_expectArray() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Hello");
         list.add("World");
 
@@ -407,9 +480,25 @@ class MyArrayListTest {
     }
 
     @Test
+    void testToArray_aLengthMoreThanCapacity_expectArray() {
+        // given
+        List<String> list = new MyLinkedList<>();
+        list.add("Hello");
+        list.add("World");
+
+        // when
+        String[] result = list.toArray(new String[3]);
+
+        // then
+        assertEquals(3, result.length);
+        assertEquals("Hello", result[0]);
+        assertEquals("World", result[1]);
+    }
+
+    @Test
     void containsAll_listContainsAllElement_expectTrue() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Hello");
         list.add("World");
         list.add("Warms");
@@ -425,7 +514,7 @@ class MyArrayListTest {
     @Test
     void containsAll_listNotContainsAllElement_expectFalse() {
         // given
-        List<String> list = new MyArrayList();
+        List<String> list = new MyLinkedList<>();
         list.add("Hello");
         list.add("World");
         Collection<String> elementsToCheck = List.of("Hello", "Java");
@@ -438,9 +527,37 @@ class MyArrayListTest {
     }
 
     @Test
+    void containsAll_cIsEmpty_expectTrue() {
+        // given
+        List<String> list = new MyLinkedList<>();
+        list.add("Hello");
+        list.add("World");
+        Collection<String> elementsToCheck = List.of();
+
+        // when
+        boolean actual = list.containsAll(elementsToCheck);
+
+        // then
+        assertTrue(actual);
+    }
+
+    @Test
+    void containsAll_listIsEmpty_expectFalse() {
+        // given
+        List<String> list = new MyLinkedList<>();
+        Collection<String> elementsToCheck = List.of("Hello", "World");
+
+        // when
+        boolean actual = list.containsAll(elementsToCheck);
+
+        // then
+        assertFalse(actual);
+    }
+
+    @Test
     void addAll_addElements_expectElementsAdded() {
         // given
-        List<String> list = new MyArrayList<>();
+        List<String> list = new MyLinkedList<>();
         List<String> input = List.of("A", "B", "C");
 
         // when
@@ -457,7 +574,7 @@ class MyArrayListTest {
     @Test
     void addAll_emptyCollection_expectFalse() {
         // given
-        List<String> list = new MyArrayList<>();
+        List<String> list = new MyLinkedList<>();
         List<String> empty = List.of();
 
         // when
@@ -471,7 +588,7 @@ class MyArrayListTest {
     @Test
     void testAddAll_intoMiddle_expectTrue() {
         // given
-        List<String> list = new MyArrayList<>();
+        List<String> list = new MyLinkedList<>();
         list.add("A");
         list.add("D");
 
@@ -490,7 +607,7 @@ class MyArrayListTest {
     @Test
     void addAll_emptyCollection_returnsFalse() {
         // given
-        List<Integer> list = new MyArrayList<>();
+        List<Integer> list = new MyLinkedList<>();
         list.add(1);
 
         // when
@@ -504,7 +621,7 @@ class MyArrayListTest {
     @Test
     void subList_middleRange() {
         // given
-        List<String> list = new MyArrayList<>();
+        List<String> list = new MyLinkedList<>();
         list.add("A");
         list.add("B");
         list.add("C");
@@ -523,7 +640,7 @@ class MyArrayListTest {
     @Test
     void subList_negativeFromIndex_throwException() {
         // given
-        List<String> list = new MyArrayList<>();
+        List<String> list = new MyLinkedList<>();
         list.add("A");
 
         // when
@@ -535,7 +652,7 @@ class MyArrayListTest {
     @Test
     void subList_toIndexGreaterThanSize_throwException() {
         // given
-        List<String> list = new MyArrayList<>();
+        List<String> list = new MyLinkedList<>();
         list.add("A");
 
         // when
@@ -547,7 +664,7 @@ class MyArrayListTest {
     @Test
     void subList_fromGreaterThanTo_throwException() {
         // given
-        List<String> list = new MyArrayList<>();
+        List<String> list = new MyLinkedList<>();
         list.add("A");
         list.add("B");
 
@@ -555,73 +672,5 @@ class MyArrayListTest {
         Assertions.assertThrows(IndexOutOfBoundsException.class,
                 () -> list.subList(2, 1)
         );
-    }
-
-    @Test
-    void iterator_nextElement_expectNextElement() {
-        // given
-        List<String> list = new MyArrayList<>();
-        list.add("A");
-        list.add("B");
-        list.add("C");
-        list.add("D");
-
-        // when
-        Iterator<String> iterator = list.iterator();
-        iterator.next();
-
-        // then
-        assertEquals("B", iterator.next());
-        assertEquals("C", iterator.next());
-        assertEquals("D", iterator.next());
-        Assertions.assertThrows(NoSuchElementException.class,
-                iterator::next
-        );
-        assertFalse(iterator.hasNext());
-    }
-
-
-    @Test
-    void listIterator_nextElement_expectNextElement() {
-        // given
-        List<String> list = new MyArrayList<>();
-        list.add("A");
-        list.add("B");
-        list.add("C");
-        list.add("D");
-
-        // when
-        ListIterator<String> iterator = list.listIterator(1);
-        iterator.next();
-
-        // then
-        assertEquals("C", iterator.next());
-        assertEquals("D", iterator.next());
-        Assertions.assertThrows(NoSuchElementException.class,
-                iterator::next
-        );
-        assertFalse(iterator.hasNext());
-    }
-
-    @Test
-    void listIterator_previousElement_expectPrevElement() {
-        // given
-        List<String> list = new MyArrayList<>();
-        list.add("A");
-        list.add("B");
-        list.add("C");
-        list.add("D");
-
-        // when
-        ListIterator<String> iterator = list.listIterator(3);
-        iterator.previous();
-
-        // then
-        assertEquals("B", iterator.previous());
-        assertEquals("A", iterator.previous());
-        Assertions.assertThrows(NoSuchElementException.class,
-                iterator::previous
-        );
-        assertFalse(iterator.hasPrevious());
     }
 }
