@@ -1,7 +1,7 @@
 package com.sveta.exercise;
 
-import java.util.Arrays;
-import java.util.TreeSet;
+import java.util.HashMap;
+//Input: s = "anagram", t = "nagaram"
 
 public class Anagram {
     public boolean isAnagram(String s, String t) {
@@ -10,16 +10,27 @@ public class Anagram {
         char[] firstString = s.toLowerCase().toCharArray();
         char[] secondString = t.toLowerCase().toCharArray();
 
-        TreeSet<char[]> set = new TreeSet<>();
+        HashMap<String, Integer> map = new HashMap<>();
 
-        set.add(firstString);
-        set.add(secondString);
-
-        if (set.size() == 1) {
-            return false;
+        for (char c : firstString) {
+            String key = String.valueOf(c);
+            int count = map.getOrDefault(key, 0);
+            map.put(key, count + 1);
         }
 
-        return Arrays.equals(firstString, secondString);
+        for (char c : secondString) {
+            String key = String.valueOf(c);
+            int count = map.getOrDefault(key, 0);
+            map.put(key, count - 1);
+        }
+
+        for (Integer i : map.values()) {
+            if (i != 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public boolean lengthChecker(String s, String t) {

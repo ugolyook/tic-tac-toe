@@ -4,73 +4,84 @@
 
 package com.sveta.collections.queue;
 
-public class MyBinaryHeap {
-    public int heapSize;
-    public int[] heap;
-    private int capacity;
-    private boolean isMinHeap;
+import java.util.*;
+
+public class MyBinaryHeap<T extends Comparable<T>> implements Iterable<T> {
+    private int heapSize;
+    private final T[] heap;
+    private final boolean isMinHeap;
+    private Comparator<T> customComparator;
 
     public MyBinaryHeap(int capacity, boolean isMinHeap) {
-        this.capacity = capacity;
         this.isMinHeap = isMinHeap;
         this.heapSize = 0;
-        this.heap = new int[capacity];
+        this.heap = (T[]) new Comparable[capacity];
     }
 
-    private int parent(int i) {
-        return (i - 1) / 2;
+    public MyBinaryHeap(Collection<T> collection) {
+        this(collection, null);
     }
 
-    private int leftChild(int i) {
-        return (2 * i + 1);
+    public MyBinaryHeap(Collection<T> collection, Comparator<T> comparator) {
+        this.customComparator = comparator;
+        this.isMinHeap = true;
+        this.heap = (T[]) new Comparable[collection.size()];
+        this.heapSize = 0;
     }
 
-    private int rightChild(int i) {
-        return (2 * i + 2);
+    private boolean compare(T a, T b) {
+        int cmp;
+        if (customComparator != null) {
+            cmp = customComparator.compare(a, b);
+        } else {
+            cmp = a.compareTo(b);
+        }
+        return isMinHeap ? cmp < 0 : cmp > 0;
     }
 
-    public void shiftDown(int i) {
-        while (2 * i + 1 < heapSize) {
-            int left = 2 * i + 1;
-            int right = 2 * i + 2;
-            int j = left;
+    private void shiftDown(int i) {
+        while (getLeftChild(i) < heapSize) {
+            int left = getLeftChild(i);
+            int right = getRightChild(i);
+            int smallest = left;
 
-            if (right < heapSize && heap[right] < heap[left]) {
-                j = right;
+            if (right < heapSize && compare(heap[right], heap[left])) {
+                smallest = right;
             }
 
-            if (heap[i] <= heap[j]) {
+            if (compare(heap[i], heap[smallest])) {
                 break;
             }
 
-            int temp = heap[i];
-            heap[i] = heap[j];
-            heap[j] = temp;
-            i = j;
+            T temp = heap[i];
+            heap[i] = heap[smallest];
+            heap[smallest] = temp;
+            i = smallest;
         }
     }
 
-    public void shiftUp(int i) {
-        while (heap[i] < heap[(i - 1) / 2]) {
-            int temp = heap[i];
-            heap[i] = heap[(i - 1) / 2];
-            heap[(i - 1) / 2] = temp;
-            i = (i - 1) / 2;
+
+    private void shiftUp(int i) {
+        while (compare(heap[i], heap[getParent(i)])) {
+            T temp = heap[i];
+            heap[i] = heap[getParent(i)];
+            heap[getParent(i)] = temp;
+            i = getParent(i);
         }
     }
 
-    public void insert(int key) {
+    public void insert(T key) {
         heapSize = heapSize + 1;
         heap[heapSize - 1] = key;
         shiftUp(heapSize - 1);
     }
 
-    public void merge(MyBinaryHeap a, MyBinaryHeap b) {
+    public void merge(MyBinaryHeap<T> b) {
         for (int i = 0; i < b.heapSize; i++) {
-            a.heap[a.heapSize] = b.heap[i];
-            a.heapSize++;
+            heap[heapSize] = b.heap[i];
+            heapSize++;
         }
-        a.heapify();
+        heapify();
     }
 
     public void heapify() {
@@ -79,32 +90,50 @@ public class MyBinaryHeap {
         }
     }
 
-    public int extractRoot() {
-        int root = heap[0];
+    public T extractRoot() {
+        T root = heap[0];
         heap[0] = heap[heapSize - 1];
         heapSize--;
         shiftDown(0);
         return root;
     }
 
-    public int getRoot() {
+    public T getRoot() {
         return heap[0];
     }
 
-    public String iterator() {
-        StringBuilder buffer = new StringBuilder();
-        for (int i = 0; i < heapSize; i++){
-            buffer.append(heap[i]);
-        }
-        return buffer.toString();
-    }
-
-    public boolean isContain(int j){
-        for (int i = 0; i < heapSize; i++){
-            if(heap[i] == j){
+    public boolean isContain(T j) {
+        for (int i = 0; i < heapSize; i++) {
+            if (heap[i] == j) {
                 return true;
             }
         }
         return false;
+    }
+
+    private static int getRightChild(int i) {
+        return 2 * i + 2;
+    }
+
+    private static int getLeftChild(int i) {
+        return 2 * i + 1;
+    }
+
+    private static int getParent(int i) {
+        return (i - 1) / 2;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return Arrays.stream(heap).iterator();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder buffer = new StringBuilder();
+        for (int i = 0; i < heapSize; i++) {
+            buffer.append(heap[i]);
+        }
+        return buffer.toString();
     }
 }
