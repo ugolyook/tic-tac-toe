@@ -1,6 +1,5 @@
-package com.sveta.collections.test;
+package com.sveta.collections.list;
 
-import com.sveta.collections.list.MyArrayList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

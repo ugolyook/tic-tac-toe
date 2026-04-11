@@ -1,6 +1,5 @@
-package com.sveta.collections.test;
+package com.sveta.collections.map;
 
-import com.sveta.collections.map.MyHashMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

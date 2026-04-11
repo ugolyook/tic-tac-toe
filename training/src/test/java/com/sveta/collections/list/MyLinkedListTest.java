@@ -1,8 +1,7 @@
-package com.sveta.collections.test;
+package com.sveta.collections.list;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.sveta.collections.list.MyLinkedList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

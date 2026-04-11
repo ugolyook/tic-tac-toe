@@ -1,6 +1,5 @@
-package com.sveta.collections.test;
+package com.sveta.collections.queue;
 
-import com.sveta.collections.queue.MyBinaryHeap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

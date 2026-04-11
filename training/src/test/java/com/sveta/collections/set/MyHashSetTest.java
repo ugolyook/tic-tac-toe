@@ -1,6 +1,5 @@
-package com.sveta.collections.test;
+package com.sveta.collections.set;
 
-import com.sveta.collections.set.MyHashSet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
