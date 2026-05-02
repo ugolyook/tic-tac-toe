@@ -29,7 +29,6 @@ public class AnnotationDemo {
 
                 System.out.println(" Method with annotation @Name: " + method.getName());
                 System.out.println(" Value: " + nameAnnotation.value());
-
                 try {
                     method.invoke(demo);
                 } catch (Exception e) {
