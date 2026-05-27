@@ -1,6 +1,6 @@
-package Multithreading.warehouse;
+package MultiThreading.warehouse;
 
-import Multithreading.domain.Auto;
+import MultiThreading.domain.Auto;
 
 import java.util.LinkedList;
 import java.util.Queue;

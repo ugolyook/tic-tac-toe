@@ -1,7 +1,7 @@
-package Multithreading.components;
+package MultiThreading.components;
 
-import Multithreading.domain.Auto;
-import Multithreading.warehouse.Warehouse;
+import MultiThreading.domain.Auto;
+import MultiThreading.warehouse.Warehouse;
 
 public class Dealer implements Runnable {
     private final Warehouse warehouse;

@@ -1,7 +1,7 @@
-package Multithreading.components;
+package MultiThreading.components;
 
-import Multithreading.domain.Auto;
-import Multithreading.warehouse.Warehouse;
+import MultiThreading.domain.Auto;
+import MultiThreading.warehouse.Warehouse;
 
 public class FactoryConveyor implements Runnable {
     private final Warehouse warehouse;
@@ -22,12 +22,14 @@ public class FactoryConveyor implements Runnable {
     @Override
     public void run() {
         int producedCount = 0;
-        while(running && !Thread.currentThread().isInterrupted()){
-            try{
+        while (running && !Thread.currentThread().isInterrupted()) {
+            try {
                 Thread.sleep(productionDelay);
 
-                Auto auto = new Auto(name);
-            } catch (InterruptedException e){
+                Auto auto = new Auto(this.name);
+                warehouse.put(auto);
+                producedCount++;
+            } catch (InterruptedException e) {
                 System.out.println(name + " interrupted. Machines produced: " + producedCount);
                 Thread.currentThread().interrupt();
                 break;

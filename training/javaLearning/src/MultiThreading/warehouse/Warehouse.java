@@ -1,6 +1,6 @@
-package Multithreading.warehouse;
+package MultiThreading.warehouse;
 
-import Multithreading.domain.Auto;
+import MultiThreading.domain.Auto;
 
 public interface Warehouse {
     void put(Auto auto) throws InterruptedException;

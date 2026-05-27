@@ -1,14 +1,16 @@
-package Multithreading.warehouse;
+package MultiThreading.warehouse;
 
-import Multithreading.domain.Auto;
+import MultiThreading.domain.Auto;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SemaphoreWarehouse implements Warehouse {
     private final ConcurrentLinkedQueue<Auto> stock = new ConcurrentLinkedQueue<>();
     private final Semaphore emptySlots;
     private final Semaphore filledSlots;
+    private final AtomicInteger currentSize = new AtomicInteger(0);
     private final int capacity;
 
     public SemaphoreWarehouse(int capacity) {
@@ -22,7 +24,8 @@ public class SemaphoreWarehouse implements Warehouse {
         emptySlots.acquire();
 
         stock.offer(auto);
-        System.out.printf("Warehouse + %s. Warehouse: %d/%d%n", auto, stock.size(), capacity);
+        int size = stock.size();
+        System.out.printf("Warehouse + %s. Warehouse: %d/%d%n", auto, size, capacity);
 
         filledSlots.release();
     }
@@ -32,7 +35,8 @@ public class SemaphoreWarehouse implements Warehouse {
         filledSlots.acquire();
 
         Auto auto = stock.poll();
-        System.out.printf("Warehouse + %s. Warehouse: %d/%d%n", auto, stock.size(), capacity);
+        int size = currentSize.decrementAndGet();
+        System.out.printf("Warehouse + %s. Warehouse: %d/%d%n", auto, size, capacity);
 
         emptySlots.release();
         return auto;

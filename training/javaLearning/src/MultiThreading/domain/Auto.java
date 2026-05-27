@@ -1,12 +1,14 @@
-package Multithreading.domain;
+package MultiThreading.domain;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Auto {
-    private static int counter = 0;
+    private static final AtomicInteger counter = new AtomicInteger(0);
     private final int id;
     private final String lineName;
 
     public Auto(String lineName) {
-        this.id = ++counter;
+        this.id = counter.incrementAndGet();
         this.lineName = lineName;
     }
 
