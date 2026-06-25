@@ -12,15 +12,24 @@ public class MatrixMixer {
         int rows = matrixA.length;
         int cols = matrixA[0].length;
         int[][] matrixC = new int[rows][cols];
+
+        int cores = Runtime.getRuntime().availableProcessors();
+        int threadsCount = Math.min(cores, rows);
+
+        int rowsPerThread = rows / threadsCount;
         List<Thread> threads = new ArrayList<>();
 
-        for (int i = 0; i < rows; i++) {
-            int finalI = i;
+        for (int t = 0; t < rows; t++) {
+            int startRow = t * rowsPerThread;
+            int endRow = (t == threadsCount - 1) ? rows : (t + 1) * rowsPerThread;
+
             Thread virtualThread = Thread.startVirtualThread(() -> {
 //            Thread thread = new Thread(() -> {
                 System.out.println("New thread was started!");
-                for (int j = 0; j < cols; j++) {
-                    matrixC[finalI][j] = matrixA[finalI][j] + matrixB[finalI][j];////////////////// effectively final
+                for (int i = startRow; i < endRow; i++) {
+                    for (int j = 0; j < cols; j++) {
+                        matrixC[i][j] = matrixA[i][j] + matrixB[i][j];////////////////// effectively final
+                    }
                 }
             });
             threads.add(virtualThread);
