@@ -1,7 +1,5 @@
 package QuadraticEquation.typesOfEquation;
 
-import QuadraticEquation.BaseQuadraticEquation;
-
 public class FractionalNumbersEquation extends BaseQuadraticEquation<Double> {
     private final String a;
     private final String b;

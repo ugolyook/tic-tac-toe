@@ -1,16 +1,19 @@
-package QuadraticEquation;
+package QuadraticEquation.typesOfEquation;
+
+import QuadraticEquation.parameter.QuadraticParameter;
+import QuadraticEquation.root.Root;
 
 import java.util.ArrayList;
 
 import static QuadraticEquation.Parsing.fromStringToInt;
 
-public abstract class BaseQuadraticEquation<T> {
-    protected double a;
-    protected double b;
-    protected double c;
-    protected double extremumPoint;
+public abstract class BaseQuadraticEquation {
+    protected QuadraticParameter a;
+    protected QuadraticParameter b;
+    protected QuadraticParameter c;
+    protected QuadraticParameter extremumPoint;
 
-    public BaseQuadraticEquation(String a, String b, String c) {
+    protected BaseQuadraticEquation(QuadraticParameter a, QuadraticParameter b, QuadraticParameter c) {
         this.a = fromStringToInt(a);
         this.b = fromStringToInt(b);
         this.c = fromStringToInt(c);
@@ -20,14 +23,12 @@ public abstract class BaseQuadraticEquation<T> {
         this.extremumPoint = -this.b / (2.0 * this.a);
     }
 
-    public T findDiscriminant() {
-        double discriminant = b * b - 4 * a * c;
-        return convertToType(discriminant);
-    }
+    public abstract void findDiscriminant();
 
     protected abstract T convertToType(double value);
 
-    public ArrayList<T> FindRoot() {
+    public ArrayList<Root> findRoot() {
+
         double discriminant = b * b - 4 * a * c;
         ArrayList<T> roots = new ArrayList<>();
 
@@ -35,20 +36,24 @@ public abstract class BaseQuadraticEquation<T> {
             double firstRoot = (-b + Math.sqrt(discriminant)) / (2 * a);
             double secondRoot = (-b - Math.sqrt(discriminant)) / (2 * a);
             roots.add(convertToType(firstRoot));
-            roots.add(convertToType(secondRoot));
+            roots.add(RealRoot());
         } else if (Math.abs(discriminant) == 0) {
             double root = -b / (2.0 * a);
             roots.add(convertToType(root));
+        } else if (discriminant < 0) {
+            double realPart = -super.b / (2.0 * super.a);
+            double imaginaryPart = Math.sqrt(-discriminant) / (2.0 * super.a);
+            new ComplexRoot(realPart, imaginaryPart)
         }
         return roots;
     }
 
-    public T findExtremum() {
+    public Coordinate findExtremum() {
         double extremumY = a * (extremumPoint * extremumPoint) + (b * extremumPoint) + c;
         return convertToType(extremumY);
     }
 
-    public StringBuilder findMinMaxInterval() {
+    public Interval findMinMaxInterval() {
         StringBuilder builder = new StringBuilder();
         if (a > 0) {
             builder.append("Interval of decrease: from negative infinity to the ")
