@@ -1,26 +1,21 @@
 package QuadraticEquation.typesOfEquation;
 
-import QuadraticEquation.BaseQuadraticEquation;
+import QuadraticEquation.typesOfEquation.parametr.RealParameter;
 
-public class QuadraticEquation extends BaseQuadraticEquation<Double> {
-    private final String a;
-    private final String b;
-    private final String c;
+public class QuadraticEquation extends BaseQuadraticEquation<RealParameter> {
+    private RealParameter a;
+    private RealParameter b;
+    private RealParameter c;
 
-    public QuadraticEquation(String a, String b, String c) {
+    public QuadraticEquation(RealParameter a, RealParameter b, RealParameter c) {
         super(a, b, c);
-        this.a = a;
-        this.b = b;
-        this.c = c;
     }
 
     @Override
-    protected Double convertToType(double value) {
-        return Math.round(value * 100.0) / 100.0;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%sx^2 + %sx + %s = 0", a, b, c);
+    public RealParameter findDiscriminant() {
+       RealParameter squB = b.multiplication(b,b);
+       RealParameter squAC = a.multiplication(a,c);
+       RealParameter squ4AC = a.multiplication(squAC,4);
+        return a.subtraction(squB,squ4AC);
     }
 }

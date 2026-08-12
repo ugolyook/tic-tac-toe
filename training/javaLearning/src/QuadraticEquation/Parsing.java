@@ -1,7 +1,7 @@
 package QuadraticEquation;
 
 public class Parsing {
-    static int fromStringToInt(String str) {
+    public static int fromStringToInt(String str) {
         if (str == null || str.isEmpty()) return 0;
         str = str.trim();
         boolean isNegative = str.startsWith("-");

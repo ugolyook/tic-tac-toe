@@ -1,20 +1,16 @@
 package QuadraticEquation.typesOfEquation;
 
-import QuadraticEquation.BaseQuadraticEquation;
-
 import java.util.ArrayList;
 
-public class ComplexNumbersEquation extends BaseQuadraticEquation<String> {
-    private final String a;
-    private final String b;
-    private final String c;
-
-
-    public ComplexNumbersEquation(String a, String b, String c) {
+public class ComplexEquation extends BaseQuadraticEquation<String> {
+    public ComplexEquation(String a, String b, String c) {
         super(a, b, c);
-        this.a = a;
-        this.b = b;
-        this.c = c;
+
+    }
+
+    @Override
+    public void findDiscriminant() {
+
     }
 
     @Override
@@ -22,7 +18,7 @@ public class ComplexNumbersEquation extends BaseQuadraticEquation<String> {
         return String.valueOf(value);
     }
 
-    public ArrayList<String> FindRoot() {
+    public ArrayList<String> findRoot() {
         double discriminant = super.b * super.b - 4 * super.a * super.c;
 
         ArrayList<String> roots = new ArrayList<>();
@@ -41,7 +37,7 @@ public class ComplexNumbersEquation extends BaseQuadraticEquation<String> {
                 roots.add(realPart + " - " + Math.abs(imaginaryPart) + "i");
             }
         } else {
-            return super.FindRoot();
+            return super.findRoot();
         }
 
         return roots;

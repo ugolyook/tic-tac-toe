@@ -1,13 +1,11 @@
 package QuadraticEquation.typesOfEquation;
 
-import QuadraticEquation.BaseQuadraticEquation;
-
-public class FractionalNumbersEquation extends BaseQuadraticEquation<Double> {
+public class FractionalEquation extends BaseQuadraticEquation<Double> {
     private final String a;
     private final String b;
     private final String c;
 
-    public FractionalNumbersEquation(String a,String b, String c) {
+    public FractionalEquation(String a, String b, String c) {
         super(a, b, c);
         this.a = a;
         this.b = b;
