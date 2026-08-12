@@ -1,27 +1,13 @@
 package QuadraticEquation.typesOfEquation.parametr;
 
-public abstract class QuadraticParameter {
-    protected double value;
+public interface QuadraticParameter<T extends QuadraticParameter<?>> {
 
-    public QuadraticParameter(double value) {
-        this.value = value;
-    }
+    T mult(T a);
 
-    public QuadraticParameter() {
-        this.value = 0;
-    }
+    T mult(int a);
 
-    public double getValue() {
-        return value;
-    }
+    T sub(T a);
 
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
+    T sum(T a);
 }
 

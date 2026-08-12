@@ -13,7 +13,7 @@ public class QuadraticEquation extends BaseQuadraticEquation<RealParameter> {
 
     @Override
     public RealParameter findDiscriminant() {
-       RealParameter squB = b.multiplication(b,b);
+       RealParameter squB = b.multiplication(b);
        RealParameter squAC = a.multiplication(a,c);
        RealParameter squ4AC = a.multiplication(squAC,4);
         return a.subtraction(squB,squ4AC);

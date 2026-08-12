@@ -1,19 +1,29 @@
 package QuadraticEquation.typesOfEquation.parametr;
 
-public class RealParameter extends QuadraticParameter {
-    public RealParameter(double value) {
-        super(value);
+public class RealParameter implements QuadraticParameter<RealParameter> {
+    int value;
+
+    public RealParameter(int value) {
+        this.value = value;
     }
 
-    public RealParameter multiplication(RealParameter a, RealParameter b) {
-        return new RealParameter(a.getValue() * b.getValue());
+    @Override
+    public RealParameter mult(RealParameter a) {
+        return new RealParameter(value * a.value);
     }
 
-    public RealParameter multiplication(RealParameter a, int b) {
-        return new RealParameter(a.getValue() * b);
+    @Override
+    public RealParameter mult(int a) {
+        return null;
     }
 
-    public RealParameter subtraction(RealParameter a, RealParameter b) {
-        return new RealParameter(a.getValue() - b.getValue());
+    @Override
+    public RealParameter sub(RealParameter a) {
+        return null;
+    }
+
+    @Override
+    public RealParameter sum(RealParameter a) {
+        return null;
     }
 }
