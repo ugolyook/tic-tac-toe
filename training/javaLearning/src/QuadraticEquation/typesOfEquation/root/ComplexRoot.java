@@ -1,6 +1,28 @@
 package QuadraticEquation.typesOfEquation.root;
 
-public class ComplexRoot extends Root{
+import QuadraticEquation.typesOfEquation.parametr.RealParameter;
+
+public class ComplexRoot<T> extends Root<>{
+    private RealParameter realPart;
+    private RealParameter imaginaryPart;
+
+    public ComplexRoot(RealParameter realPart, RealParameter imaginaryPart) {
+        this.realPart = realPart;
+        this.imaginaryPart = imaginaryPart;
+    }
+
+    public RealParameter getRealPart() {
+        return realPart;
+    }
+
+    public RealParameter getImaginaryPart() {
+        return imaginaryPart;
+    }
+
+    @Override
+    public String toString() {
+        return realPart + " + " + imaginaryPart + "i";
+    }
 //     if (realPart == 0) {
 //        roots.add(imaginaryPart + "i");
 //        roots.add("-" + imaginaryPart + "i");

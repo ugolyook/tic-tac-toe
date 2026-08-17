@@ -6,10 +6,10 @@ import QuadraticEquation.typesOfEquation.QuadraticEquation;
 
 public class Main {
     static void main(String[] args) {
-        QuadraticEquation quadraticEquation = new QuadraticEquation("-2", "8", "-3");
+       QuadraticEquation quadraticEquation = new QuadraticEquation("-2", "8", "-3");
         System.out.println(quadraticEquation);
-        System.out.println(quadraticEquation.findRoot());
-        System.out.println(quadraticEquation.findExtremum());
+       System.out.println(quadraticEquation.findRoot());
+       System.out.println(quadraticEquation.findExtremum());
         System.out.println(quadraticEquation.findMinMaxInterval());
         System.out.println(quadraticEquation.findDiscriminant());
 
