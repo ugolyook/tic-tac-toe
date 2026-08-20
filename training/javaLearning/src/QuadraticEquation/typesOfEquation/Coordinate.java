@@ -2,11 +2,11 @@ package QuadraticEquation.typesOfEquation;
 
 import QuadraticEquation.typesOfEquation.parametr.RealParameter;
 
-public class Coordinate {
-    private final RealParameter x;
-    private final RealParameter y;
+public class Coordinate<T> {
+    private T x;
+    private T y;
 
-    public Coordinate(RealParameter x, RealParameter y) {
+    public Coordinate(T x, T y) {
         this.x = x;
         this.y = y;
     }

@@ -87,9 +87,14 @@ public class FractionalParameter implements QuadraticParameter<FractionalParamet
 
     @Override
     public String toString() {
-        return "FractionalParameter{" +
-                "numerator=" + numerator +
-                ", denominator=" + denominator +
-                '}';
+        if (denominator == 1) {
+            return String.valueOf(numerator);
+        }
+
+        return numerator + "/" + denominator;
+    }
+
+    public boolean isZero() {
+        return denominator == 0;
     }
 }

@@ -1,27 +1,42 @@
 package QuadraticEquation;
 
-import QuadraticEquation.typesOfEquation.ComplexEquation;
 import QuadraticEquation.typesOfEquation.FractionalEquation;
 import QuadraticEquation.typesOfEquation.QuadraticEquation;
+import QuadraticEquation.typesOfEquation.parametr.FractionalParameter;
+import QuadraticEquation.typesOfEquation.parametr.RealParameter;
 
 public class Main {
     static void main(String[] args) {
-       QuadraticEquation quadraticEquation = new QuadraticEquation("-2", "8", "-3");
+        QuadraticEquation quadraticEquation =
+                new QuadraticEquation(
+                        new RealParameter(-2),
+                        new RealParameter(8),
+                        new RealParameter(-3)
+                );
+
         System.out.println(quadraticEquation);
-       System.out.println(quadraticEquation.findRoot());
-       System.out.println(quadraticEquation.findExtremum());
+        System.out.println(quadraticEquation.findRoot());
+        System.out.println(quadraticEquation.findExtremum());
         System.out.println(quadraticEquation.findMinMaxInterval());
         System.out.println(quadraticEquation.findDiscriminant());
 
-        ComplexEquation complex = new ComplexEquation("1", "0", "1");
-        System.out.println(complex);
-        System.out.println(complex.findRoot());
+        QuadraticEquation quadraticEquation2 =
+                new QuadraticEquation(
+                        new RealParameter(1),
+                        new RealParameter(0),
+                        new RealParameter(1)
+                );
 
-        QuadraticEquation quadraticEquation2 = new QuadraticEquation("1", "0", "1");
         System.out.println(quadraticEquation2);
         System.out.println(quadraticEquation2.findRoot());
 
-        FractionalEquation fractional = new FractionalEquation("0.5F","-0.75F","0.25F");
+        FractionalEquation fractional =
+                new FractionalEquation(
+                        new FractionalParameter(1, 2),
+                        new FractionalParameter(-3, 4),
+                        new FractionalParameter(1, 4)
+                );
+        
         System.out.println(fractional);
         System.out.println(fractional.findRoot());
     }

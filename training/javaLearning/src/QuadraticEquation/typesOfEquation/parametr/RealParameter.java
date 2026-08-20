@@ -1,13 +1,13 @@
 package QuadraticEquation.typesOfEquation.parametr;
 
 public class RealParameter implements QuadraticParameter<RealParameter> {
-    int value;
+    double value;
 
-    public RealParameter(int value) {
+    public RealParameter(double value) {
         this.value = value;
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 
@@ -46,4 +46,13 @@ public class RealParameter implements QuadraticParameter<RealParameter> {
         return new RealParameter(-value);
     }
 
+    @Override
+    public boolean isZero() {
+        return value == 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
 }

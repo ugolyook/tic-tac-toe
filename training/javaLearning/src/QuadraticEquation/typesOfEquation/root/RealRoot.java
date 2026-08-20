@@ -7,10 +7,6 @@ public class RealRoot extends Root<RealParameter> {
        super(value);
     }
 
-    public RealParameter getValue() {
-        return value;
-    }
-
     @Override
     public String toString() {
         return value.toString();

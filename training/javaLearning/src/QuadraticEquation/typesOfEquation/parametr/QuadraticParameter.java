@@ -14,5 +14,9 @@ public interface QuadraticParameter<T extends QuadraticParameter<?>> {
     T div(T a);
 
     T negate();
+
+    boolean isZero();
+
+    double getValue();
 }
 
