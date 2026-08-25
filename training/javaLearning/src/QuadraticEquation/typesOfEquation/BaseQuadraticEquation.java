@@ -73,7 +73,7 @@ public abstract class BaseQuadraticEquation<T extends QuadraticParameter<T>> {
 
         T y = axSquared.sum(bx).sum(c);
 
-        return new Coordinate(x, y);
+        return new Coordinate<>(x, y);
     }
 
     public Interval findMinMaxInterval() {

@@ -5,8 +5,8 @@ import QuadraticEquation.typesOfEquation.root.ComplexRoot;
 import QuadraticEquation.typesOfEquation.root.RealRoot;
 import QuadraticEquation.typesOfEquation.root.Root;
 
-public class QuadraticEquation extends BaseQuadraticEquation<RealParameter> {
-    public QuadraticEquation(RealParameter a, RealParameter b, RealParameter c) {
+public class RealEquation extends BaseQuadraticEquation<RealParameter> {
+    public RealEquation(RealParameter a, RealParameter b, RealParameter c) {
         super(a, b, c);
     }
 
