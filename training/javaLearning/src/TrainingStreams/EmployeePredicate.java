@@ -1,4 +1,4 @@
-package Training;
+package TrainingStreams;
 
 @FunctionalInterface
 public interface EmployeePredicate {

@@ -1,4 +1,4 @@
-package Training;
+package TrainingStreams;
 
 import java.util.Objects;
 

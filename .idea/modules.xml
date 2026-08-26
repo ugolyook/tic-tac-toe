@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/training/javaLearning/TrainingFile/TrainingFile.iml" filepath="$PROJECT_DIR$/training/javaLearning/TrainingFile/TrainingFile.iml" />
       <module fileurl="file://$PROJECT_DIR$/training/javaLearning/javaLearning.iml" filepath="$PROJECT_DIR$/training/javaLearning/javaLearning.iml" />
       <module fileurl="file://$PROJECT_DIR$/leetcode/leetcode.iml" filepath="$PROJECT_DIR$/leetcode/leetcode.iml" />
       <module fileurl="file://$PROJECT_DIR$/patterns/patterns.iml" filepath="$PROJECT_DIR$/patterns/patterns.iml" />
       <module fileurl="file://$PROJECT_DIR$/tic-tac-toe.iml" filepath="$PROJECT_DIR$/tic-tac-toe.iml" />
       <module fileurl="file://$PROJECT_DIR$/training/training.iml" filepath="$PROJECT_DIR$/training/training.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trainingForInterview/trainingForInterview.iml" filepath="$PROJECT_DIR$/trainingForInterview/trainingForInterview.iml" />
     </modules>
   </component>
 </project>
